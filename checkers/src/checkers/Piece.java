@@ -27,7 +27,7 @@ public class Piece extends StackPane {
     public double getOldY() {
         return oldY;
     }
-
+    
     public Piece(PieceType type, int x, int y) {
         this.type = type;
 

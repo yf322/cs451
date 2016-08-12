@@ -1,6 +1,19 @@
 package checkers;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,12 +26,13 @@ public class CheckersApp extends Application {
     public static final int WIDTH = 8;
     public static final int HEIGHT = 8;
 
-    private Tile[][] board = new Tile[WIDTH][HEIGHT];
-    private boolean firstPlayerTurn = true;
-    private Group tileGroup = new Group();
-    private Group pieceGroup = new Group();
+    private static Tile[][] board = new Tile[WIDTH][HEIGHT];
+    private static boolean firstPlayerTurn = true;
+    private static Group tileGroup = new Group();
+    private static Group pieceGroup = new Group();
+    private static JPanel contentPane;
 
-    private Parent createContent() {
+    private static Parent createContent() {
         Pane root = new Pane();
         root.setPrefSize(WIDTH * TILE_SIZE, HEIGHT * TILE_SIZE);
         root.getChildren().addAll(tileGroup, pieceGroup);
@@ -50,14 +64,14 @@ public class CheckersApp extends Application {
         return root;
     }
     
-    private boolean perimeterCheck(int x, int y) {
+    private static boolean perimeterCheck(int x, int y) {
     	if (x < 0 || x > 7 || y < 0 || y > 7) {
         	return false;
         }
     	return true;
     }
 
-    private MoveResult tryMove(Piece piece, int newX, int newY) {
+    private static MoveResult tryMove(Piece piece, int newX, int newY) {
     	if (!perimeterCheck(newX, newY)) {
     		return new MoveResult(MoveType.NONE);
     	}
@@ -100,19 +114,58 @@ public class CheckersApp extends Application {
         return new MoveResult(MoveType.NONE);
     }
 
-    private int toBoard(double pixel) {
+    private static int toBoard(double pixel) {
         return (int)(pixel + TILE_SIZE / 2) / TILE_SIZE;
     }
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        Scene scene = new Scene(createContent());
-        primaryStage.setTitle("CheckersApp");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+    private static Scene createScene() {
+    	Scene scene = new Scene(createContent());
+    	return scene;
     }
+    private static void initAndShowGUI() {
+        // This method is invoked on the EDT thread
+        JFrame frame = new JFrame("Checkers");
+        contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		contentPane.setSize(new Dimension(850, 850));
+		topBar();
+        final JFXPanel fxPanel = new JFXPanel();
+        contentPane.add(fxPanel, BorderLayout.CENTER);
+        frame.add(contentPane);
+        frame.setSize(820, 890);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    private Piece makePiece(PieceType type, int x, int y) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                initFX(fxPanel);
+            }
+       });
+    }
+    
+    private static void initFX(JFXPanel fxPanel) {
+        // This method is invoked on the JavaFX thread
+        Scene scene = createScene();
+        fxPanel.setScene(scene);
+        //lock();
+    }
+    /*
+    private static void lock() {
+    	for(int i = 0; i < WIDTH; i++) {
+    		for(int j = 0; j < HEIGHT; j++) {
+    			if(board[i][j].getPiece() != null) {
+    				if(board[i][j].getPiece()) {
+    					board[i][j].setMouseTransparent(true);
+    				}
+    			}
+    		}
+    	}
+    	
+    }
+*/
+    private static Piece makePiece(PieceType type, int x, int y) {
         Piece piece = new Piece(type, x, y);
 
         piece.setOnMouseReleased(e -> {
@@ -132,6 +185,7 @@ public class CheckersApp extends Application {
                     piece.move(newX, newY);
                     board[x0][y0].setPiece(null);
                     board[newX][newY].setPiece(piece);
+                    firstPlayerTurn = !firstPlayerTurn;
                     break;
                 case KILL:
                     piece.move(newX, newY);
@@ -141,14 +195,40 @@ public class CheckersApp extends Application {
                     Piece otherPiece = result.getPiece();
                     board[toBoard(otherPiece.getOldX())][toBoard(otherPiece.getOldY())].setPiece(null);
                     pieceGroup.getChildren().remove(otherPiece);
+                    firstPlayerTurn = !firstPlayerTurn;
                     break;
             }
         });
 
         return piece;
     }
+    
+    public static void topBar() {
+		JPanel topBar = new JPanel();
+		JButton quit = new JButton("QUIT");
+		JLabel uniqueId = new JLabel("Unique ID : ");
+		
+		quit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+				
+			}
+		});
+		
+		topBar.add(quit, BorderLayout.WEST);
+		topBar.add(uniqueId, BorderLayout.EAST);
+		contentPane.add(topBar, BorderLayout.NORTH);
+	}
 
     public static void main(String[] args) {
-        launch(args);
+        initAndShowGUI();
     }
+
+	@Override
+	public void start(Stage arg0) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 }
