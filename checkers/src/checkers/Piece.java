@@ -4,7 +4,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 
-import static checkers.CheckersApp.TILE_SIZE;
+import static checkers.Board.TILE_SIZE;
 
 /**
  * @author Almas Baimagambetov (almaslvl@gmail.com)
@@ -18,6 +18,10 @@ public class Piece extends StackPane {
 
     public PieceType getType() {
         return type;
+    }
+    
+    public void setType(PieceType type) {
+    	this.type = type;
     }
 
     public double getOldX() {
