@@ -128,20 +128,7 @@ public class Board extends Application {
         Scene scene = createScene();
         fxPanel.setScene(scene);
     }
-    /*
-    private  void lock() {
-    	for(int i = 0; i < WIDTH; i++) {
-    		for(int j = 0; j < HEIGHT; j++) {
-    			if(board[i][j].getPiece() != null) {
-    				if(board[i][j].getPiece()) {
-    					board[i][j].setMouseTransparent(true);
-    				}
-    			}
-    		}
-    	}
-    	
-    }
-*/
+
     private Piece makePiece(PieceType type, int x, int y) {
         Piece piece = new Piece(type, x, y);
 
@@ -162,6 +149,7 @@ public class Board extends Application {
                     piece.move(newX, newY);
                     board[x0][y0].setPiece(null);
                     board[newX][newY].setPiece(piece);
+                    checkKing(newX, newY, piece);
                     firstPlayerTurn = !firstPlayerTurn;
                     break;
                 case KILL:
@@ -172,12 +160,26 @@ public class Board extends Application {
                     Piece otherPiece = result.getPiece();
                     board[toBoard(otherPiece.getOldX())][toBoard(otherPiece.getOldY())].setPiece(null);
                     pieceGroup.getChildren().remove(otherPiece);
+                    checkKing(newX, newY, piece);
                     firstPlayerTurn = !firstPlayerTurn;
                     break;
             }
         });
 
         return piece;
+    }
+    
+    public void checkKing(int newX, int newY, Piece piece) {
+    	if(!piece.getType().isKing && (piece.getType().oppoLine == newY)) {
+    		if(piece.getType() == PieceType.RED) {
+    			piece.setType(PieceType.REDKING);
+    			piece.coronation();
+    		}
+    		else {
+    			piece.setType(PieceType.WHITEKING);
+    			piece.coronation();
+    		}
+    	}
     }
     
     public void topBar() {

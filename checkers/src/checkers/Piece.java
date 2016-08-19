@@ -1,9 +1,9 @@
 package checkers;
 
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
-
 import static checkers.Board.TILE_SIZE;
 
 /**
@@ -15,6 +15,7 @@ public class Piece extends StackPane {
 
     private double mouseX, mouseY;
     private double oldX, oldY;
+    private javafx.scene.image.Image image;
 
     public PieceType getType() {
         return type;
@@ -48,7 +49,8 @@ public class Piece extends StackPane {
 
         Ellipse ellipse = new Ellipse(TILE_SIZE * 0.3125, TILE_SIZE * 0.26);
         ellipse.setFill(type == PieceType.RED
-                ? Color.valueOf("#c40003") : Color.valueOf("#fff9f4"));
+                ? Color.valueOf("#ff0000") : Color.valueOf("#ffffff"));
+        
 
         ellipse.setStroke(Color.BLACK);
         ellipse.setStrokeWidth(TILE_SIZE * 0.03);
@@ -66,6 +68,22 @@ public class Piece extends StackPane {
         setOnMouseDragged(e -> {
             relocate(e.getSceneX() - mouseX + oldX, e.getSceneY() - mouseY + oldY);
         });
+    }
+    
+    public void coronation() {
+    	if(type == PieceType.REDKING){
+    		image = new javafx.scene.image.Image(ClassLoader.getSystemResourceAsStream("crownRed.png"));
+    	}
+    	else {
+    		image = new javafx.scene.image.Image(ClassLoader.getSystemResourceAsStream("crownWhite.png"));
+    	}
+    	ImageView imageView = new ImageView();
+    	imageView.setImage(image);
+    	imageView.setFitWidth(TILE_SIZE * 0.35);
+    	imageView.setFitHeight(TILE_SIZE * 0.35);
+    	imageView.setTranslateX((TILE_SIZE - TILE_SIZE * 0.3125 * 2) / 2);
+    	imageView.setTranslateY((TILE_SIZE - TILE_SIZE * 0.26 * 2) / 2);
+    	getChildren().add(imageView);
     }
 
     public void move(int x, int y) {
