@@ -26,6 +26,23 @@ public class Server {
 		return this.ip;
 	}
 	
+	public DataOutputStream getDos(){
+		return this.dos;
+	}
+	
+	public void setDos(DataOutputStream dos){
+		this.dos = dos;
+	}
+	
+	public DataInputStream getDis(){
+		return this.dis;
+	}
+	
+	public void setDis(DataInputStream dis){
+		this.dis = dis;
+	}
+	
+	
 	public ServerSocket getServerSocket(){
 		return this.serverSocket;
 	}
@@ -54,15 +71,17 @@ public class Server {
 		return true;
 	}
 	
-	public void listenForServerRequest() {
-		Socket socket = null;
+	public boolean listenForServerRequest() {
+		socket = null;
 		try {
 			socket = serverSocket.accept();
 			dos = new DataOutputStream(socket.getOutputStream());
 			dis = new DataInputStream(socket.getInputStream());
 			System.out.println("CLIENT HAS REQUESTED TO JOIN, AND WE HAVE ACCEPTED");
+			return true;
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("error occured");
+			return false;
 		}
 	}
 }

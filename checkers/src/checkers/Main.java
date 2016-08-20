@@ -1,6 +1,8 @@
 package checkers;
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class Main implements Runnable{
 
@@ -20,32 +22,63 @@ public class Main implements Runnable{
 		frame.getBtnStartButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(frame.getGameType());
 				if (frame.getGameType().equals("Host")) {
 					if (server.createServerSocket())
 					{
 						System.out.println("Waiting for other opponent to join");
 						yourTurn = true;
+						connection = true;
 					}
 					else{
 						System.out.println("The server is currently busy");
 					}
 				} else if (frame.getGameType().equals("Join"))
 				{
-					server.connectToServer();
+					if(server.connectToServer()){
+						connection = true;
+					}
+					else{
+						System.out.println("failed");
+					}
 				}
 			}
 		});
-		if(connection){
-			thread = new Thread(this, "Main");
-			thread.start();
+		while(true){
+			try {
+				if(connection){
+					break;
+				}
+				Thread.sleep(1000);
+			} catch (InterruptedException e1) {
+			}
+			
 		}
+		thread = new Thread(this, "Main");
+		thread.start();
 	}
 
 	@Override
 public void run() {
-		System.out.println("test");
-		server.listenForServerRequest();
+		if(!yourTurn){
+			Board board = new Board();
+		}
+		while(true){
+			try {
+				if(yourTurn){
+					if(server.listenForServerRequest()){
+						Board board = new Board();
+						break;
+					}
+				}
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+			}
+			
+		}
 	}
+	
+public void initalSetup(){
+	
+}
 }
 
