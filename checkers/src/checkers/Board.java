@@ -73,6 +73,19 @@ public class Board extends Application {
         }
     	return true;
     }
+    
+    private boolean dectectJumpable(Piece piece, int newX, int newY) {
+    	int[][] dir = new int[][]{{1,1}, {-1,1}, {-1,-1}, {1,-1}};
+    	for(int i = 0; i < dir.length; i++) {
+    		int destX = newX + dir[i][0];
+    		int destY = newY + dir[i][1];
+    		MoveResult result = tryMove(piece, destX, destY);
+    		if(result.getType() == MoveType.KILL) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
 
     private MoveResult tryMove(Piece piece, int newX, int newY) {
     	if (!perimeterCheck(newX, newY)) {
@@ -172,7 +185,9 @@ public class Board extends Application {
                     board[toBoard(otherPiece.getOldX())][toBoard(otherPiece.getOldY())].setPiece(null);
                     pieceGroup.getChildren().remove(otherPiece);
                     checkKing(newX, newY, piece);
-                    firstPlayerTurn = !firstPlayerTurn;
+                    if(!dectectJumpable(piece, newX, newY)) {
+                    	firstPlayerTurn = !firstPlayerTurn;
+                    }
                     try {
                     	server.getDos().writeInt(oldX);
                     	server.getDos().writeInt(oldY);
@@ -223,7 +238,18 @@ public class Board extends Application {
         }
     }
     
+    public void unlock() {
+    	for (int y = 0; y < HEIGHT; y++) {
+            for (int x = 0; x < WIDTH; x++) {
+            	if(board[x][y].hasPiece()) {
+            		board[x][y].getPiece().setMouseTransparent(false);
+            	}
+            }
+		}
+    }
+    
     public void lock(boolean turn) {
+    	unlock();
     	if(firstPlayerTurn == turn) {
     		for (int y = 0; y < HEIGHT; y++) {
                 for (int x = 0; x < WIDTH; x++) {
@@ -231,22 +257,22 @@ public class Board extends Application {
                 		if((board[x][y].getPiece().getType() == PieceType.RED || board[x][y].getPiece().getType() == PieceType.REDKING) && !firstPlayerTurn) {
                 			board[x][y].getPiece().setMouseTransparent(true);
                 		}
-//                		else if((board[x][y].getPiece().getType() == PieceType.WHITE || board[x][y].getPiece().getType() == PieceType.WHITEKING) && !firstPlayerTurn) {
-//                			board[x][y].getPiece().setMouseTransparent(true);
-//                		}
+                		else if((board[x][y].getPiece().getType() == PieceType.WHITE || board[x][y].getPiece().getType() == PieceType.WHITEKING) && firstPlayerTurn) {
+                			board[x][y].getPiece().setMouseTransparent(true);
+                		}
                 	}
                 }
     		}
     	}
-    	else {
-    		for (int y = 0; y < HEIGHT; y++) {
-                for (int x = 0; x < WIDTH; x++) {
-                	if(board[x][y].hasPiece()) {
-                		board[x][y].getPiece().setMouseTransparent(true);
-                	}
-                }
-    		}
-    	}
+//    	else {
+//    		for (int y = 0; y < HEIGHT; y++) {
+//                for (int x = 0; x < WIDTH; x++) {
+//                	if(board[x][y].hasPiece()) {
+//                		board[x][y].getPiece().setMouseTransparent(true);
+//                	}
+//                }
+//    		}
+//    	}
     }
     
     public void topBar() {
