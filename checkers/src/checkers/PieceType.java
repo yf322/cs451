@@ -1,7 +1,7 @@
 package checkers;
 
 /**
- * @author Yongqiang Fan
+ * @author Yongqiang Fan(fldclassicblue@gmail.com)
  */
 public enum PieceType {
     RED(1, false, 7), WHITE(-1, false, 0), REDKING(1, true, 7), WHITEKING(1, true, 0);

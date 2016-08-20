@@ -2,11 +2,15 @@ package checkers;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.Serializable;
+import java.util.Enumeration;
 
+import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,7 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
-public class Menu extends JFrame {
+public class Menu extends JFrame implements Serializable{
 
 	/**
 	 * 
@@ -24,21 +28,33 @@ public class Menu extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField id;
+	private JPanel textPanel;
+	private ButtonGroup hostJoinGroup = new ButtonGroup();
+	private JButton start = new JButton("Start");
+	private JButton cancel = new JButton("Cancel");
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Menu frame = new Menu();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public String getGameID(){
+		return this.id.getText();
+	}
+	
+	public String getGameType(){
+		for (Enumeration<AbstractButton> buttons = hostJoinGroup.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button = buttons.nextElement();
+
+            if (button.isSelected()) {
+                return button.getText();
+            }
+        }
+
+        return null;
+	}
+	
+	public JButton getBtnStartButton(){
+		return this.start;
+	}
+	
+	public JButton getBtnCancelButton(){
+		return this.cancel;
 	}
 
 	/**
@@ -63,25 +79,14 @@ public class Menu extends JFrame {
 	public void deployButton() {
 		JPanel buttonPanel = new JPanel(new GridLayout(0, 2));
 		buttonPanel.setPreferredSize(new Dimension(400, 50));
-		JButton start = new JButton("Start");
-		JButton cancel = new JButton("Cancel");
-		
-		start.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO
-				setVisible(false);
-				dispose();
-			}
-		});
+		start = new JButton("Start");
+		cancel = new JButton("Cancel");
 		
 		cancel.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
-				
 			}
 		});
 		buttonPanel.add(start);
@@ -91,30 +96,41 @@ public class Menu extends JFrame {
 	}
 	
 	public void deployRadioButton() {
-	    JRadioButton host = new JRadioButton("Host", true);
-	    JRadioButton join = new JRadioButton("Join", false);
+	    JRadioButton rdbtnHostButton = new JRadioButton("Host", true);
+	    JRadioButton rdbtnJoinButton = new JRadioButton("Join", false);
 	    
-	    ButtonGroup group = new ButtonGroup();
-	    group.add(host);
-	    group.add(join);
+	    hostJoinGroup.add(rdbtnHostButton);
+	    hostJoinGroup.add(rdbtnJoinButton);
 	    
 	    JPanel radioPanel = new JPanel(new GridLayout(0, 1));
 	    radioPanel.setPreferredSize(new Dimension(400, 120));
-	    radioPanel.add(host);
-	    radioPanel.add(join);
+	    radioPanel.add(rdbtnHostButton);
+	    radioPanel.add(rdbtnJoinButton);
 	    
 	    contentPane.add(radioPanel, BorderLayout.NORTH);
+	    
+	    rdbtnHostButton.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent me){
+				textPanel.setVisible(false);
+			}
+		});
+		
+		rdbtnJoinButton.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent me){
+				textPanel.setVisible(true);
+			}
+		});
 	}
 	
 	public void deployText() {
 		TitledBorder titledBorder = new TitledBorder("Unique ID required");
-		JPanel textPanel = new JPanel();
 		id = new JTextField();
 		id.setPreferredSize(new Dimension(100, 30));
-		
+		textPanel = new JPanel();
 		textPanel.add(id, BorderLayout.CENTER);
 		textPanel.setBorder(titledBorder);
 		contentPane.add(textPanel, BorderLayout.CENTER);
+		textPanel.setVisible(false);
 	}
 
 }

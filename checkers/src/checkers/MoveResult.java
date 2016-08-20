@@ -1,7 +1,7 @@
 package checkers;
 
 /**
- * @author Almas Baimagambetov (almaslvl@gmail.com)
+ * @author Yongqiang Fan (fldclassicblue@gmail.com)
  */
 public class MoveResult {
 

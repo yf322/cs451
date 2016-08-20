@@ -118,14 +118,9 @@ public class Board extends Application {
     private int toBoard(double pixel) {
         return (int)(pixel + TILE_SIZE / 2) / TILE_SIZE;
     }
-
-    private Scene createScene() {
-    	Scene scene = new Scene(createContent());
-    	return scene;
-    }
     
     private void initFX(JFXPanel fxPanel) {
-        Scene scene = createScene();
+        Scene scene = new Scene(createContent());
         fxPanel.setScene(scene);
     }
 
@@ -138,8 +133,8 @@ public class Board extends Application {
 
             MoveResult result = tryMove(piece, newX, newY);
 
-            int x0 = toBoard(piece.getOldX());
-            int y0 = toBoard(piece.getOldY());
+            int oldX = toBoard(piece.getOldX());
+            int oldY = toBoard(piece.getOldY());
 
             switch (result.getType()) {
                 case NONE:
@@ -147,14 +142,15 @@ public class Board extends Application {
                     break;
                 case NORMAL:
                     piece.move(newX, newY);
-                    board[x0][y0].setPiece(null);
+                    board[oldX][oldY].setPiece(null);
                     board[newX][newY].setPiece(piece);
                     checkKing(newX, newY, piece);
                     firstPlayerTurn = !firstPlayerTurn;
+                    lock(firstPlayerTurn);
                     break;
                 case KILL:
                     piece.move(newX, newY);
-                    board[x0][y0].setPiece(null);
+                    board[oldX][oldY].setPiece(null);
                     board[newX][newY].setPiece(piece);
 
                     Piece otherPiece = result.getPiece();
@@ -178,6 +174,49 @@ public class Board extends Application {
     		else {
     			piece.setType(PieceType.WHITEKING);
     			piece.coronation();
+    		}
+    	}
+    }
+    
+    public void receiveMove(int oldX, int oldY, int newX, int newY, int killX, int killY, boolean turn) {
+    	Piece piece = board[oldX][oldY].getPiece();
+    	piece.move(newX, newY);
+        board[oldX][oldY].setPiece(null);
+        board[newX][newY].setPiece(piece);
+        checkKing(newX, newY, piece);
+        
+        try {
+        	Piece otherPiece = board[killX][killY].getPiece();
+            board[toBoard(otherPiece.getOldX())][toBoard(otherPiece.getOldY())].setPiece(null);
+            pieceGroup.getChildren().remove(otherPiece);
+            checkKing(newX, newY, piece);
+        } catch(Exception e) {
+        	
+        }
+    }
+    
+    public void lock(boolean turn) {
+    	if(firstPlayerTurn == turn) {
+    		for (int y = 0; y < HEIGHT; y++) {
+                for (int x = 0; x < WIDTH; x++) {
+                	if(board[x][y].hasPiece()) {
+                		if((board[x][y].getPiece().getType() == PieceType.RED || board[x][y].getPiece().getType() == PieceType.REDKING) && !firstPlayerTurn) {
+                			board[x][y].getPiece().setMouseTransparent(true);
+                		}
+//                		else if((board[x][y].getPiece().getType() == PieceType.WHITE || board[x][y].getPiece().getType() == PieceType.WHITEKING) && !firstPlayerTurn) {
+//                			board[x][y].getPiece().setMouseTransparent(true);
+//                		}
+                	}
+                }
+    		}
+    	}
+    	else {
+    		for (int y = 0; y < HEIGHT; y++) {
+                for (int x = 0; x < WIDTH; x++) {
+                	if(board[x][y].hasPiece()) {
+                		board[x][y].getPiece().setMouseTransparent(true);
+                	}
+                }
     		}
     	}
     }

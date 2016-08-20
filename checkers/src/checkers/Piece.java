@@ -7,7 +7,7 @@ import javafx.scene.shape.Ellipse;
 import static checkers.Board.TILE_SIZE;
 
 /**
- * @author Almas Baimagambetov (almaslvl@gmail.com)
+ * @author Yongqiang Fan (fldclassicblue@gmail.com)
  */
 public class Piece extends StackPane {
 
@@ -38,16 +38,16 @@ public class Piece extends StackPane {
 
         move(x, y);
 
-        Ellipse bg = new Ellipse(TILE_SIZE * 0.3125, TILE_SIZE * 0.26);
+        Ellipse bg = new Ellipse(TILE_SIZE * 0.3, TILE_SIZE * 0.25);
         bg.setFill(Color.BLACK);
 
         bg.setStroke(Color.BLACK);
         bg.setStrokeWidth(TILE_SIZE * 0.03);
 
-        bg.setTranslateX((TILE_SIZE - TILE_SIZE * 0.3125 * 2) / 2);
-        bg.setTranslateY((TILE_SIZE - TILE_SIZE * 0.26 * 2) / 2 + TILE_SIZE * 0.07);
+        bg.setTranslateX((TILE_SIZE - TILE_SIZE * 0.3 * 2) / 2);
+        bg.setTranslateY((TILE_SIZE - TILE_SIZE * 0.25 * 2) / 2 + TILE_SIZE * 0.07);
 
-        Ellipse ellipse = new Ellipse(TILE_SIZE * 0.3125, TILE_SIZE * 0.26);
+        Ellipse ellipse = new Ellipse(TILE_SIZE * 0.3, TILE_SIZE * 0.25);
         ellipse.setFill(type == PieceType.RED
                 ? Color.valueOf("#ff0000") : Color.valueOf("#ffffff"));
         
@@ -55,8 +55,8 @@ public class Piece extends StackPane {
         ellipse.setStroke(Color.BLACK);
         ellipse.setStrokeWidth(TILE_SIZE * 0.03);
 
-        ellipse.setTranslateX((TILE_SIZE - TILE_SIZE * 0.3125 * 2) / 2);
-        ellipse.setTranslateY((TILE_SIZE - TILE_SIZE * 0.26 * 2) / 2);
+        ellipse.setTranslateX((TILE_SIZE - TILE_SIZE * 0.3 * 2) / 2);
+        ellipse.setTranslateY((TILE_SIZE - TILE_SIZE * 0.25 * 2) / 2);
 
         getChildren().addAll(bg, ellipse);
 
@@ -81,8 +81,8 @@ public class Piece extends StackPane {
     	imageView.setImage(image);
     	imageView.setFitWidth(TILE_SIZE * 0.35);
     	imageView.setFitHeight(TILE_SIZE * 0.35);
-    	imageView.setTranslateX((TILE_SIZE - TILE_SIZE * 0.3125 * 2) / 2);
-    	imageView.setTranslateY((TILE_SIZE - TILE_SIZE * 0.26 * 2) / 2);
+    	imageView.setTranslateX((TILE_SIZE - TILE_SIZE * 0.3 * 2) / 2);
+    	imageView.setTranslateY((TILE_SIZE - TILE_SIZE * 0.25 * 2) / 2);
     	getChildren().add(imageView);
     }
 

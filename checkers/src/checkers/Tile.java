@@ -4,7 +4,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 /**
- * @author Almas Baimagambetov (almaslvl@gmail.com)
+ * @author Yongqiang Fan (fldclassicblue@gmail.com)
  */
 public class Tile extends Rectangle {
 

@@ -1,6 +1,6 @@
 package checkers;
 /**
- * @author Almas Baimagambetov (almaslvl@gmail.com)
+ * @author Yongqiang Fan (fldclassicblue@gmail.com)
  */
 public enum MoveType {
     NONE, NORMAL, KILL
