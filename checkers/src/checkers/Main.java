@@ -51,14 +51,15 @@ public void run() {
 	}
 	
 public void initalSetup(){
+	Board board;
 	if(!server.getYourTurn()){
-		Board board = new Board();
+		board = new Board(server);
 	}
 	while(true){
 		try {
 			if(server.getYourTurn()){
 				if(server.listenServerBeginning()){
-					Board board = new Board();
+					board = new Board(server);
 					break;
 				}
 			}

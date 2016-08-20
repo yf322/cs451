@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -32,7 +33,8 @@ public class Board extends Application {
     private Group tileGroup = new Group();
     private Group pieceGroup = new Group();
     private JPanel contentPane;
-
+    private Server server;
+    
     private Parent createContent() {
         Pane root = new Pane();
         root.setPrefSize(WIDTH * TILE_SIZE, HEIGHT * TILE_SIZE);
@@ -48,11 +50,11 @@ public class Board extends Application {
                 Piece piece = null;
 
                 if (y <= 2 && (x + y) % 2 != 0) {
-                    piece = makePiece(PieceType.RED, x, y);
+                    piece = makePiece(PieceType.RED, x, y, server);
                 }
 
                 if (y >= 5 && (x + y) % 2 != 0) {
-                    piece = makePiece(PieceType.WHITE, x, y);
+                    piece = makePiece(PieceType.WHITE, x, y, server);
                 }
 
                 if (piece != null) {
@@ -124,7 +126,7 @@ public class Board extends Application {
         fxPanel.setScene(scene);
     }
 
-    private Piece makePiece(PieceType type, int x, int y) {
+    private Piece makePiece(PieceType type, int x, int y, Server server) {
         Piece piece = new Piece(type, x, y);
 
         piece.setOnMouseReleased(e -> {
@@ -147,6 +149,19 @@ public class Board extends Application {
                     checkKing(newX, newY, piece);
                     firstPlayerTurn = !firstPlayerTurn;
                     lock(firstPlayerTurn);
+                    try {
+                    	server.getDos().writeInt(oldX);
+                    	server.getDos().writeInt(oldY);
+                    	server.getDos().writeInt(newX);
+                    	server.getDos().writeInt(newY);
+                    	server.getDos().writeInt(100);
+                    	server.getDos().writeInt(100);
+                    	server.getDos().writeBoolean(firstPlayerTurn);
+                    	server.getDos().flush();
+                    	System.out.println("Data sent successfully");
+                    } catch (Exception e1) {
+                    	System.out.println("Error occured while sending some data");
+                    }
                     break;
                 case KILL:
                     piece.move(newX, newY);
@@ -158,6 +173,19 @@ public class Board extends Application {
                     pieceGroup.getChildren().remove(otherPiece);
                     checkKing(newX, newY, piece);
                     firstPlayerTurn = !firstPlayerTurn;
+                    try {
+                    	server.getDos().writeInt(oldX);
+                    	server.getDos().writeInt(oldY);
+                    	server.getDos().writeInt(newX);
+                    	server.getDos().writeInt(newY);
+                    	server.getDos().writeInt(100);
+                    	server.getDos().writeInt(100);
+                    	server.getDos().writeBoolean(firstPlayerTurn);
+                    	server.getDos().flush();
+                    	System.out.println("Data sent successfully");
+                    } catch (Exception e1) {
+                    	System.out.println("Error occured while sending some data");
+                    }
                     break;
             }
         });
@@ -178,7 +206,7 @@ public class Board extends Application {
     	}
     }
     
-    public void receiveMove(int oldX, int oldY, int newX, int newY, int killX, int killY, boolean turn) {
+    public void receiveMove(int oldX, int oldY, int newX, int newY, Integer killX, Integer killY, boolean turn) {
     	Piece piece = board[oldX][oldY].getPiece();
     	piece.move(newX, newY);
         board[oldX][oldY].setPiece(null);
@@ -240,19 +268,19 @@ public class Board extends Application {
 		contentPane.add(topBar, BorderLayout.NORTH);
 	}
 
-    public static void main(String[] args) {
-    	EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					new Board();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-    }
+//    public static void main(String[] args) {
+//    	EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					new Board();
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//    }
     
-    public Board() {
+    public Board(Server server) {
     	JFrame frame = new JFrame("Checkers");
         contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -265,13 +293,34 @@ public class Board extends Application {
         frame.setSize(820, 890);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        this.server = server;
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 initFX(fxPanel);
             }
        });
+    	while(true){
+    		try {
+    			int oldX = server.getDis().readInt();
+    			int oldY = server.getDis().readInt();
+    			int newX = server.getDis().readInt();
+    			int newY = server.getDis().readInt();
+    			Integer KillX = server.getDis().readInt();
+    			Integer KillY = server.getDis().readInt();
+    			boolean turn = server.getDis().readBoolean();
+    			if(KillX == 100 && KillY == 100){
+    				KillX = null;
+    				KillY = null;
+    			}
+    			receiveMove(oldX, oldY, newX, newY, KillX, KillY, turn);
+    			System.out.println("Data successfully received");
+    		} catch (IOException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    			System.out.println("error receiving the data");
+    		}
+    	} 
 	}
 
 	@Override
