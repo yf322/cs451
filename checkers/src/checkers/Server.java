@@ -17,6 +17,8 @@ public class Server {
 	private Socket socket;
 	private DataOutputStream dos;
 	private DataInputStream dis;
+	private boolean connection = false;
+	private boolean yourTurn = false;
 	
 	public int getPort(){
 		return this.port;
@@ -47,12 +49,31 @@ public class Server {
 		return this.serverSocket;
 	}
 	
+	public boolean getConnection(){
+		return this.connection;
+	}
+	
+	public void setConnection(boolean connection){
+		this.connection = connection;
+	}
+	
+	public boolean getYourTurn(){
+		return this.yourTurn;
+	}
+	
+	public void setYourTurn(boolean yourTurn){
+		this.yourTurn = yourTurn;
+	}
+	
 	public Boolean createServerSocket(){
 		try {
 			this.serverSocket = new ServerSocket(port, 8, InetAddress.getByName(ip));
+			connection = true;
+			yourTurn = true;
+			System.out.println("Waiting for other opponent to join");
 		}
 		catch (IOException e) {
-			System.out.println("Couldn't create socket on port " + this.port);
+			System.out.println("The server is currently busy");
 			return false;
 		}
 		return true;
@@ -63,21 +84,22 @@ public class Server {
 			socket = new Socket(this.ip, this.port);
 			dos = new DataOutputStream(socket.getOutputStream());
 			dis = new DataInputStream(socket.getInputStream());
+			connection = true;
 		} catch (IOException e) {
-			System.out.println("Unable to connect to the address: " + this.ip + ":" + this.port + " | Starting a server");
+			System.out.println("No existing game. Please host a game first");
 			return false;
 		}
 		System.out.println("Successfully connected to the server.");
 		return true;
 	}
 	
-	public boolean listenForServerRequest() {
+	public boolean listenServerBeginning() {
 		socket = null;
 		try {
 			socket = serverSocket.accept();
 			dos = new DataOutputStream(socket.getOutputStream());
 			dis = new DataInputStream(socket.getInputStream());
-			System.out.println("CLIENT HAS REQUESTED TO JOIN, AND WE HAVE ACCEPTED");
+			System.out.println("Other opponent joined the room.");
 			return true;
 		} catch (IOException e) {
 			System.out.println("error occured");

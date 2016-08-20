@@ -49,11 +49,11 @@ public class Menu extends JFrame implements Serializable{
         return null;
 	}
 	
-	public JButton getBtnStartButton(){
+	public JButton getStartButton(){
 		return this.start;
 	}
 	
-	public JButton getBtnCancelButton(){
+	public JButton getCancelButton(){
 		return this.cancel;
 	}
 

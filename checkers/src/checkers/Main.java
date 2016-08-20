@@ -9,8 +9,7 @@ public class Main implements Runnable{
 	private Thread thread;
 	private Server server = new Server();
 	private Menu frame = new Menu();
-	private boolean connection = false;
-	private boolean yourTurn = false;
+
 	
 	public static void main(String[] args) {
 		Main main = new Main();
@@ -19,66 +18,52 @@ public class Main implements Runnable{
 	public Main() {
 		frame.setVisible(true);
 		System.out.println(frame.getGameType());
-		frame.getBtnStartButton().addActionListener(new ActionListener() {
+		frame.getStartButton().addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (frame.getGameType().equals("Host")) {
-					if (server.createServerSocket())
-					{
-						System.out.println("Waiting for other opponent to join");
-						yourTurn = true;
-						connection = true;
-					}
-					else{
-						System.out.println("The server is currently busy");
-					}
+					server.createServerSocket();
+					frame.getStartButton().setEnabled(false);
 				} else if (frame.getGameType().equals("Join"))
 				{
 					if(server.connectToServer()){
-						connection = true;
-					}
-					else{
-						System.out.println("failed");
-					}
+						frame.getStartButton().setEnabled(false);
+					};
 				}
 			}
 		});
 		while(true){
 			try {
-				if(connection){
+				if(server.getConnection()){
+					thread = new Thread(this, "Main");
+					thread.start();
 					break;
 				}
 				Thread.sleep(1000);
-			} catch (InterruptedException e1) {
-			}
-			
+			} catch (InterruptedException e1) {}	
 		}
-		thread = new Thread(this, "Main");
-		thread.start();
 	}
 
 	@Override
 public void run() {
-		if(!yourTurn){
-			Board board = new Board();
-		}
-		while(true){
-			try {
-				if(yourTurn){
-					if(server.listenForServerRequest()){
-						Board board = new Board();
-						break;
-					}
-				}
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-			}
-			
-		}
+		initalSetup();
 	}
 	
 public void initalSetup(){
-	
+	if(!server.getYourTurn()){
+		Board board = new Board();
+	}
+	while(true){
+		try {
+			if(server.getYourTurn()){
+				if(server.listenServerBeginning()){
+					Board board = new Board();
+					break;
+				}
+			}
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {}}
 }
 }
 
