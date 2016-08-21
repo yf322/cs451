@@ -30,7 +30,6 @@ public class Main {
 					}
 					JOptionPane.showMessageDialog(frame, "Your unique ID is "
 							+ server.getPort());
-					frame.getStartButton().setEnabled(true);
 				} else if (frame.getGameType().equals("Join")) {
 					server.setPort(Integer.valueOf(frame.getGameID()));
 					if (server.connectToServer()) {
