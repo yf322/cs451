@@ -35,7 +35,6 @@ public class Main {
 					if (server.connectToServer()) {
 						frame.getStartButton().setEnabled(false);
 					}
-					;
 				}
 			}
 		});

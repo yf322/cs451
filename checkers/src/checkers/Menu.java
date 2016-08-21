@@ -80,8 +80,8 @@ public class Menu extends JFrame implements Serializable{
 	
 	public void deployMenu() {
 		JMenuBar menuBar = new JMenuBar();
-		JMenu help = new JMenu("help");
-		JMenuItem about = new JMenuItem("about");
+		JMenu help = new JMenu("Help");
+		JMenuItem about = new JMenuItem("About");
 		about.addActionListener(new ActionListener() {
 			
 			@Override
@@ -90,7 +90,7 @@ public class Menu extends JFrame implements Serializable{
 						+ "6/25/2016   version 1.0\n"
 						+ "Initial Version\n"
 						+ "7/29/2016   version 1.1\n"
-						+ "Revisions from TA¡¯s feedback. Fixed minor issues.\nAdded interface design figures, and use case diagram.\n"
+						+ "Revisions from TA's feedback. Fixed minor issues.\nAdded interface design figures, and use case diagram.\n"
 						+ "8/20/2016 version 1.2\n"
 						+ "First player start the game by selecting host and \nstart the game, then tell the opponent the unique ID.\n"
 						+ "Then the oponent use the unique ID to join.\n"
