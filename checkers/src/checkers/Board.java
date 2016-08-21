@@ -232,7 +232,13 @@ public class Board extends Application {
         	Piece otherPiece = board[killX][killY].getPiece();
         	System.out.println(otherPiece.getOldX() + " " + otherPiece.getOldY());
             board[killX][killY].setPiece(null);
-            pieceGroup.getChildren().remove(otherPiece);
+            Platform.runLater(new Runnable(){
+				@Override
+				public void run() {
+					pieceGroup.getChildren().remove(otherPiece);
+				}
+            });
+            
             checkKing(newX, newY, piece);
         } catch(Exception e) {
         	e.printStackTrace();

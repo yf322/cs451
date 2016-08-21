@@ -9,7 +9,7 @@ public class Main{
 
 	private Server server = new Server();
 	private Menu frame = new Menu();
-
+	private Thread thread;
 	
 	public static void main(String[] args) {
 		Main main = new Main();
@@ -45,6 +45,8 @@ public class Main{
 	}
 	
 public void initalSetup(){
+	thread = new Thread();
+	thread.setName("Board");
 	Board board;
 	if(!server.getYourTurn()){
 		board = new Board(server);
