@@ -322,10 +322,14 @@ public class Board extends Application {
 		}
     }
     
+<<<<<<< HEAD
     private void topBar() {
+=======
+    public void topBar(Integer uniqueIdDis) {
+>>>>>>> origin/master
 		JPanel topBar = new JPanel();
 		JButton quit = new JButton("QUIT");
-		JLabel uniqueId = new JLabel("Unique ID : ");
+		JLabel uniqueId = new JLabel("Unique ID : " + uniqueIdDis);
 		
 		quit.addActionListener(new ActionListener() {
 			
@@ -353,13 +357,18 @@ public class Board extends Application {
 //		});
 //    }
     
+<<<<<<< HEAD
     public Board(Server server, boolean side) {
     	frame = new JFrame("Checkers");
+=======
+    public Board(Server server, boolean side, Integer uniqueId) {
+    	JFrame frame = new JFrame("Checkers");
+>>>>>>> origin/master
         contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		contentPane.setSize(new Dimension(850, 850));
-		topBar();
+		topBar(uniqueId);
         final JFXPanel fxPanel = new JFXPanel();
         contentPane.add(fxPanel, BorderLayout.CENTER);
         frame.add(contentPane);
