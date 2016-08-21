@@ -30,6 +30,7 @@ public class Board extends Application {
 
     private Tile[][] board = new Tile[WIDTH][HEIGHT];
     private boolean firstPlayerTurn = true;
+    private final boolean side;
     private Group tileGroup = new Group();
     private Group pieceGroup = new Group();
     private JPanel contentPane;
@@ -312,7 +313,7 @@ public class Board extends Application {
 //		});
 //    }
     
-    public Board(Server server) {
+    public Board(Server server, boolean side) {
     	JFrame frame = new JFrame("Checkers");
         contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -326,6 +327,7 @@ public class Board extends Application {
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.server = server;
+        this.side = side;
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
