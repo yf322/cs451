@@ -9,6 +9,7 @@ import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -32,6 +33,9 @@ public class Board extends Application {
     private final boolean side;
     private Group tileGroup = new Group();
     private Group pieceGroup = new Group();
+    private int oppoPiece = 12;
+    private int urPiece = 12;
+    JFrame frame;
     private JPanel contentPane;
     private Server server;
     
@@ -185,6 +189,7 @@ public class Board extends Application {
                     board[toBoard(otherPiece.getOldX())][toBoard(otherPiece.getOldY())].setPiece(null);
                     pieceGroup.getChildren().remove(otherPiece);
                     checkKing(newX, newY, piece);
+                    checkWin();
                     if(!dectectJumpable(piece, newX, newY)) {
                     	lock();
                     	firstPlayerTurn = !firstPlayerTurn;
@@ -209,7 +214,7 @@ public class Board extends Application {
         return piece;
     }
     
-    public void checkKing(int newX, int newY, Piece piece) {
+    private void checkKing(int newX, int newY, Piece piece) {
     	if(!piece.getType().isKing && (piece.getType().oppoLine == newY)) {
     		if(piece.getType() == PieceType.RED) {
     			piece.setType(PieceType.REDKING);
@@ -232,7 +237,33 @@ public class Board extends Application {
     	}
     }
     
-    public void receiveMove(int oldX, int oldY, int newX, int newY, Integer killX, Integer killY) {
+    private void checkWin() {
+    	oppoPiece--;
+    	System.out.println("Opponent's pieces: " + oppoPiece);
+    	Object[] array = {"You won!"};
+        Object[] options = {"Quit"};
+    	if(oppoPiece == 0) {
+    		int result = JOptionPane.showOptionDialog(null, array, "", JOptionPane.CLOSED_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+    		if(result == 0) {
+    			System.exit(0);
+    		}
+    	}
+    }
+    
+    private void checkLose() {
+    	urPiece--;
+    	System.out.println("Your pieces:" + urPiece);
+    	Object[] array = {"You Lost!"};
+        Object[] options = {"Quit"};
+    	if(oppoPiece == 0) {
+    		int result = JOptionPane.showOptionDialog(null, array, "", JOptionPane.CLOSED_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+    		if(result == 0) {
+    			System.exit(0);
+    		}
+    	}
+    }
+    
+    private void receiveMove(int oldX, int oldY, int newX, int newY, Integer killX, Integer killY) {
     	Piece piece = board[oldX][oldY].getPiece();
     	piece.move(newX, newY);
         board[oldX][oldY].setPiece(null);
@@ -255,7 +286,7 @@ public class Board extends Application {
         }
     }
     
-    public void unlock() {
+    private void unlock() {
     	if(side && firstPlayerTurn) {
 			for (int y = 0; y < HEIGHT; y++) {
                 for (int x = 0; x < WIDTH; x++) {
@@ -280,7 +311,7 @@ public class Board extends Application {
 		}
     }
     
-    public void lock() {
+    private void lock() {
     	System.out.println("Locked Current player.");
 		for (int y = 0; y < HEIGHT; y++) {
 		    for (int x = 0; x < WIDTH; x++) {
@@ -291,7 +322,7 @@ public class Board extends Application {
 		}
     }
     
-    public void topBar() {
+    private void topBar() {
 		JPanel topBar = new JPanel();
 		JButton quit = new JButton("QUIT");
 		JLabel uniqueId = new JLabel("Unique ID : ");
@@ -323,7 +354,7 @@ public class Board extends Application {
 //    }
     
     public Board(Server server, boolean side) {
-    	JFrame frame = new JFrame("Checkers");
+    	frame = new JFrame("Checkers");
         contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -356,6 +387,7 @@ public class Board extends Application {
     				KillX = null;
     				KillY = null;
     			}
+    			else checkLose();;
     			firstPlayerTurn = turn;
     			unlock();
     			receiveMove(oldX, oldY, newX, newY, KillX, KillY);

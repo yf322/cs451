@@ -38,27 +38,27 @@ public class Piece extends StackPane {
 
         move(x, y);
 
-        Ellipse bg = new Ellipse(TILE_SIZE * 0.3, TILE_SIZE * 0.25);
-        bg.setFill(Color.BLACK);
+        Ellipse background = new Ellipse(TILE_SIZE * 0.3, TILE_SIZE * 0.25);
+        background.setFill(Color.BLACK);
 
-        bg.setStroke(Color.BLACK);
-        bg.setStrokeWidth(TILE_SIZE * 0.03);
+        background.setStroke(Color.BLACK);
+        background.setStrokeWidth(TILE_SIZE * 0.03);
 
-        bg.setTranslateX((TILE_SIZE - TILE_SIZE * 0.3 * 2) / 2);
-        bg.setTranslateY((TILE_SIZE - TILE_SIZE * 0.25 * 2) / 2 + TILE_SIZE * 0.07);
+        background.setTranslateX((TILE_SIZE - TILE_SIZE * 0.3 * 2) / 2);
+        background.setTranslateY((TILE_SIZE - TILE_SIZE * 0.25 * 2) / 2 + TILE_SIZE * 0.07);
 
-        Ellipse ellipse = new Ellipse(TILE_SIZE * 0.3, TILE_SIZE * 0.25);
-        ellipse.setFill(type == PieceType.RED
+        Ellipse piece = new Ellipse(TILE_SIZE * 0.3, TILE_SIZE * 0.25);
+        piece.setFill(type == PieceType.RED
                 ? Color.valueOf("#ff0000") : Color.valueOf("#ffffff"));
         
 
-        ellipse.setStroke(Color.BLACK);
-        ellipse.setStrokeWidth(TILE_SIZE * 0.03);
+        piece.setStroke(Color.BLACK);
+        piece.setStrokeWidth(TILE_SIZE * 0.03);
 
-        ellipse.setTranslateX((TILE_SIZE - TILE_SIZE * 0.3 * 2) / 2);
-        ellipse.setTranslateY((TILE_SIZE - TILE_SIZE * 0.25 * 2) / 2);
+        piece.setTranslateX((TILE_SIZE - TILE_SIZE * 0.3 * 2) / 2);
+        piece.setTranslateY((TILE_SIZE - TILE_SIZE * 0.25 * 2) / 2);
 
-        getChildren().addAll(bg, ellipse);
+        getChildren().addAll(background, piece);
 
         setOnMousePressed(e -> {
             mouseX = e.getSceneX();
