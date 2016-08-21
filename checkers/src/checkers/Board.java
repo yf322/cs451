@@ -64,7 +64,7 @@ public class Board extends Application {
                 }
             }
         }
-
+        initLock();
         return root;
     }
     
@@ -255,9 +255,34 @@ public class Board extends Application {
 		}
     }
     
-    public void lock(boolean turn) {
+    public void initLock() {
+		if(!side) {
+			for (int y = 0; y < HEIGHT; y++) {
+                for (int x = 0; x < WIDTH; x++) {
+                	if(board[x][y].hasPiece()) {
+						if(board[x][y].getPiece().getType() == PieceType.RED || board[x][y].getPiece().getType() == PieceType.REDKING) {
+			    			board[x][y].getPiece().setMouseTransparent(true);
+			    		}
+                	}
+                }
+			}
+		}
+		else {
+			for (int y = 0; y < HEIGHT; y++) {
+                for (int x = 0; x < WIDTH; x++) {
+                	if(board[x][y].hasPiece()) {
+						if(board[x][y].getPiece().getType() == PieceType.WHITE || board[x][y].getPiece().getType() == PieceType.WHITEKING) {
+			    			board[x][y].getPiece().setMouseTransparent(true);
+			    		}
+                	}
+                }
+			}
+		}
+	}
+    
+    public void lock() {
     	unlock();
-    	if(firstPlayerTurn == turn) {
+    	if(firstPlayerTurn == side) {
     		for (int y = 0; y < HEIGHT; y++) {
                 for (int x = 0; x < WIDTH; x++) {
                 	if(board[x][y].hasPiece()) {
@@ -348,7 +373,6 @@ public class Board extends Application {
     				KillY = null;
     			}
     			firstPlayerTurn = turn;
-    			lock(firstPlayerTurn);
     			receiveMove(oldX, oldY, newX, newY, KillX, KillY);
     			System.out.println("Data successfully received");
     		} catch (IOException e) {

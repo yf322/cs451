@@ -49,13 +49,13 @@ public void initalSetup(){
 	thread.setName("Board");
 	Board board;
 	if(!server.getYourTurn()){
-		board = new Board(server);
+		board = new Board(server, server.getYourTurn());
 	}
 	while(true){
 		try {
 			if(server.getYourTurn()){
 				if(server.listenServerBeginning()){
-					board = new Board(server);
+					board = new Board(server, server.getYourTurn());
 					break;
 				}
 			}

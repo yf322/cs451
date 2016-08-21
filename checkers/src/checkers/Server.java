@@ -100,6 +100,7 @@ public class Server {
 			dos = new DataOutputStream(socket.getOutputStream());
 			dis = new DataInputStream(socket.getInputStream());
 			System.out.println("Other opponent joined the room.");
+			serverSocket.close();
 			return true;
 		} catch (IOException e) {
 			System.out.println("error occured");
