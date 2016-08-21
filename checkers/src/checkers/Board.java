@@ -161,7 +161,7 @@ public class Board extends Application {
                     board[newX][newY].setPiece(piece);
                     checkKing(newX, newY, piece);
                     firstPlayerTurn = !firstPlayerTurn;
-                    lock(firstPlayerTurn);
+                    //lock(firstPlayerTurn);
                     try {
                     	server.getDos().writeInt(oldX);
                     	server.getDos().writeInt(oldY);
@@ -183,23 +183,23 @@ public class Board extends Application {
 
                     Piece otherPiece = result.getPiece();
                     board[toBoard(otherPiece.getOldX())][toBoard(otherPiece.getOldY())].setPiece(null);
-                    pieceGroup.getChildren().remove(otherPiece);
-                    checkKing(newX, newY, piece);
-                    if(!dectectJumpable(piece, newX, newY)) {
-                    	firstPlayerTurn = !firstPlayerTurn;
-                    }
                     try {
                     	server.getDos().writeInt(oldX);
                     	server.getDos().writeInt(oldY);
                     	server.getDos().writeInt(newX);
                     	server.getDos().writeInt(newY);
-                    	server.getDos().writeInt(100);
-                    	server.getDos().writeInt(100);
+                    	server.getDos().writeInt(toBoard(otherPiece.getOldX()));
+                    	server.getDos().writeInt(toBoard(otherPiece.getOldY()));
                     	server.getDos().writeBoolean(firstPlayerTurn);
                     	server.getDos().flush();
                     	System.out.println("Data sent successfully");
                     } catch (Exception e1) {
                     	System.out.println("Error occured while sending some data");
+                    }
+                    pieceGroup.getChildren().remove(otherPiece);
+                    checkKing(newX, newY, piece);
+                    if(!dectectJumpable(piece, newX, newY)) {
+                    	firstPlayerTurn = !firstPlayerTurn;
                     }
                     break;
             }
@@ -230,11 +230,13 @@ public class Board extends Application {
         
         try {
         	Piece otherPiece = board[killX][killY].getPiece();
-            board[toBoard(otherPiece.getOldX())][toBoard(otherPiece.getOldY())].setPiece(null);
+        	System.out.println(otherPiece.getOldX() + " " + otherPiece.getOldY());
+            board[killX][killY].setPiece(null);
             pieceGroup.getChildren().remove(otherPiece);
             checkKing(newX, newY, piece);
         } catch(Exception e) {
-        	
+        	e.printStackTrace();
+        	System.out.println(killX + " " +killY);
         }
     }
     
