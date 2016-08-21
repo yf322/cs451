@@ -28,12 +28,15 @@ import javax.swing.border.TitledBorder;
 import com.sun.glass.ui.MenuBar;
 import com.sun.org.apache.xml.internal.resolver.helpers.PublicId;
 
+/**
+ * This is a Menu class for JFrame Menu Screen
+ */
 public class Menu extends JFrame implements Serializable{
 
-	/**
-	 * 
-	 */
+	// Attribute for serialVersionUID
 	private static final long serialVersionUID = 1L;
+	
+	// Attribute for JFrame
 	private JPanel contentPane;
 	private JTextField id;
 	private JPanel textPanel;
@@ -41,10 +44,12 @@ public class Menu extends JFrame implements Serializable{
 	private JButton start = new JButton("Start");
 	private JButton cancel = new JButton("Cancel");
 
+	// Method to get the GameID from the textBox
 	public String getGameID(){
 		return this.id.getText();
 	}
 	
+	// Method to get the game type from the radio button
 	public String getGameType(){
 		for (Enumeration<AbstractButton> buttons = hostJoinGroup.getElements(); buttons.hasMoreElements();) {
             AbstractButton button = buttons.nextElement();
@@ -53,19 +58,20 @@ public class Menu extends JFrame implements Serializable{
                 return button.getText();
             }
         }
-
         return null;
 	}
 	
+	// Get Method for JButton start
 	public JButton getStartButton(){
 		return this.start;
 	}
 	
+	// Get Method for JButton cancel
 	public JButton getCancelButton(){
 		return this.cancel;
 	}
 
-	/**
+	/*
 	 * Create the frame.
 	 */
 	public Menu() {
@@ -116,6 +122,7 @@ public class Menu extends JFrame implements Serializable{
 		start = new JButton("Start");
 		cancel = new JButton("Cancel");
 		
+		// Adding acctionListener for Cancel
 		cancel.addActionListener(new ActionListener() {
 			
 			@Override
