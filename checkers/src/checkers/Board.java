@@ -2,7 +2,6 @@ package checkers;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -29,7 +28,7 @@ public class Board extends Application {
     public static final int HEIGHT = 8;
 
     private Tile[][] board = new Tile[WIDTH][HEIGHT];
-    private boolean firstPlayerTurn;
+    private boolean firstPlayerTurn = true;
     private final boolean side;
     private Group tileGroup = new Group();
     private Group pieceGroup = new Group();
@@ -64,8 +63,8 @@ public class Board extends Application {
                 }
             }
         }
-        initLock();
         lock();
+        unlock();
         return root;
     }
     
@@ -77,15 +76,17 @@ public class Board extends Application {
     }
     
     private boolean dectectJumpable(Piece piece, int newX, int newY) {
-    	int[][] dir = new int[][]{{1,1}, {-1,1}, {-1,-1}, {1,-1}};
+    	int[][] dir = new int[][]{{2,2}, {-2,2}, {-2,-2}, {2,-2}};
     	for(int i = 0; i < dir.length; i++) {
     		int destX = newX + dir[i][0];
     		int destY = newY + dir[i][1];
     		MoveResult result = tryMove(piece, destX, destY);
     		if(result.getType() == MoveType.KILL) {
+    			System.out.println("Multi-Jump detected.");
     			return true;
     		}
     	}
+    	System.out.println("Multi-Jump not detected.");
     	return false;
     }
 
@@ -102,7 +103,6 @@ public class Board extends Application {
         
         if (!piece.getType().isKing) {
 	        if (Math.abs(newX - x0) == 1 && newY - y0 == piece.getType().dir) {
-	        	firstPlayerTurn = !firstPlayerTurn;
 	            return new MoveResult(MoveType.NORMAL);
 	        } else if (Math.abs(newX - x0) == 2 && newY - y0 == piece.getType().dir * 2) {
 	
@@ -116,7 +116,6 @@ public class Board extends Application {
         }
         else {
         	if (Math.abs(newX - x0) == 1 && Math.abs(newY - y0) == piece.getType().dir) {
-        		firstPlayerTurn = !firstPlayerTurn;
 	            return new MoveResult(MoveType.NORMAL);
 	        } else if (Math.abs(newX - x0) == 2 && Math.abs(newY - y0) == piece.getType().dir * 2) {
 	
@@ -162,7 +161,6 @@ public class Board extends Application {
                     board[oldX][oldY].setPiece(null);
                     board[newX][newY].setPiece(piece);
                     checkKing(newX, newY, piece);
-                    firstPlayerTurn = !firstPlayerTurn;
                     lock();
                     try {
                     	server.getDos().writeInt(oldX);
@@ -171,7 +169,7 @@ public class Board extends Application {
                     	server.getDos().writeInt(newY);
                     	server.getDos().writeInt(100);
                     	server.getDos().writeInt(100);
-                    	server.getDos().writeBoolean(firstPlayerTurn);
+                    	server.getDos().writeBoolean(!firstPlayerTurn);
                     	server.getDos().flush();
                     	System.out.println("Data sent successfully");
                     } catch (Exception e1) {
@@ -185,6 +183,12 @@ public class Board extends Application {
 
                     Piece otherPiece = result.getPiece();
                     board[toBoard(otherPiece.getOldX())][toBoard(otherPiece.getOldY())].setPiece(null);
+                    pieceGroup.getChildren().remove(otherPiece);
+                    checkKing(newX, newY, piece);
+                    if(!dectectJumpable(piece, newX, newY)) {
+                    	lock();
+                    	firstPlayerTurn = !firstPlayerTurn;
+                    }
                     try {
                     	server.getDos().writeInt(oldX);
                     	server.getDos().writeInt(oldY);
@@ -198,11 +202,6 @@ public class Board extends Application {
                     } catch (Exception e1) {
                     	System.out.println("Error occured while sending some data");
                     }
-                    pieceGroup.getChildren().remove(otherPiece);
-                    checkKing(newX, newY, piece);
-                    if(!dectectJumpable(piece, newX, newY)) {
-                    	firstPlayerTurn = !firstPlayerTurn;
-                    }
                     break;
             }
         });
@@ -214,11 +213,21 @@ public class Board extends Application {
     	if(!piece.getType().isKing && (piece.getType().oppoLine == newY)) {
     		if(piece.getType() == PieceType.RED) {
     			piece.setType(PieceType.REDKING);
-    			piece.coronation();
+    			Platform.runLater(new Runnable(){
+    				@Override
+    				public void run() {
+    					piece.coronation();
+    				}
+                });
     		}
     		else {
     			piece.setType(PieceType.WHITEKING);
-    			piece.coronation();
+    			Platform.runLater(new Runnable(){
+    				@Override
+    				public void run() {
+    					piece.coronation();
+    				}
+                });
     		}
     	}
     }
@@ -247,7 +256,7 @@ public class Board extends Application {
     }
     
     public void unlock() {
-    	if(side) {
+    	if(side && firstPlayerTurn) {
 			for (int y = 0; y < HEIGHT; y++) {
                 for (int x = 0; x < WIDTH; x++) {
                 	if(board[x][y].hasPiece()) {
@@ -258,7 +267,7 @@ public class Board extends Application {
                 }
 			}
 		}
-		else {
+		else if (!side && !firstPlayerTurn){
 			for (int y = 0; y < HEIGHT; y++) {
                 for (int x = 0; x < WIDTH; x++) {
                 	if(board[x][y].hasPiece()) {
@@ -271,41 +280,15 @@ public class Board extends Application {
 		}
     }
     
-    public void initLock() {
-		if(!side) {
-			for (int y = 0; y < HEIGHT; y++) {
-                for (int x = 0; x < WIDTH; x++) {
-                	if(board[x][y].hasPiece()) {
-						if(board[x][y].getPiece().getType() == PieceType.RED || board[x][y].getPiece().getType() == PieceType.REDKING) {
-			    			board[x][y].getPiece().setMouseTransparent(true);
-			    		}
-                	}
-                }
-			}
-		}
-		else {
-			for (int y = 0; y < HEIGHT; y++) {
-                for (int x = 0; x < WIDTH; x++) {
-                	if(board[x][y].hasPiece()) {
-						if(board[x][y].getPiece().getType() == PieceType.WHITE || board[x][y].getPiece().getType() == PieceType.WHITEKING) {
-			    			board[x][y].getPiece().setMouseTransparent(true);
-			    		}
-                	}
-                }
-			}
-		}
-	}
-    
     public void lock() {
-    	if(!firstPlayerTurn) {
-			for (int y = 0; y < HEIGHT; y++) {
-                for (int x = 0; x < WIDTH; x++) {
-                	if(board[x][y].hasPiece()) {
-		    			board[x][y].getPiece().setMouseTransparent(true);
-                	}
-                }
-			}
-    	}
+    	System.out.println("Locked Current player.");
+		for (int y = 0; y < HEIGHT; y++) {
+		    for (int x = 0; x < WIDTH; x++) {
+		    	if(board[x][y].hasPiece()) {
+					board[x][y].getPiece().setMouseTransparent(true);
+		    	}
+		    }
+		}
     }
     
     public void topBar() {
@@ -354,7 +337,6 @@ public class Board extends Application {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.server = server;
         this.side = side;
-        firstPlayerTurn = side;
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
