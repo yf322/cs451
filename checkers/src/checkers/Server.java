@@ -71,6 +71,14 @@ public class Server {
 		this.yourTurn = yourTurn;
 	}
 	
+	public Socket getSocket(){
+		return this.socket;
+	}
+	
+	public void setSocket(Socket socket){
+		this.socket = socket;
+	}
+	
 	public Boolean createServerSocket(){
 		try {
 			createRandomPort();

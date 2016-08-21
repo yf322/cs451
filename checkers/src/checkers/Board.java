@@ -443,9 +443,8 @@ public class Board extends Application {
     			checkLose();
     			System.out.println("Data successfully received");
     		} catch (IOException e) {
-    			// TODO Auto-generated catch block
-    			e.printStackTrace();
     			System.out.println("error receiving the data");
+    			System.exit(0);
     		}
     	} 
 	}
