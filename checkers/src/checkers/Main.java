@@ -4,9 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class Main implements Runnable{
+public class Main{
 
-	private Thread thread;
+
 	private Server server = new Server();
 	private Menu frame = new Menu();
 
@@ -36,18 +36,12 @@ public class Main implements Runnable{
 		while(true){
 			try {
 				if(server.getConnection()){
-					thread = new Thread(this, "Main");
-					thread.start();
+					initalSetup();
 					break;
 				}
 				Thread.sleep(1000);
 			} catch (InterruptedException e1) {}	
 		}
-	}
-
-	@Override
-public void run() {
-		initalSetup();
 	}
 	
 public void initalSetup(){
