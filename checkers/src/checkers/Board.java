@@ -444,6 +444,7 @@ public class Board extends Application {
     			System.out.println("Data successfully received");
     		} catch (IOException e) {
     			System.out.println("error receiving the data");
+    			JOptionPane.showMessageDialog(frame, "The opponent got disconnected. You won!");
     			System.exit(0);
     		}
     	} 
