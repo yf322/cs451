@@ -29,7 +29,7 @@ public class Board extends Application {
     public static final int HEIGHT = 8;
 
     private Tile[][] board = new Tile[WIDTH][HEIGHT];
-    private boolean firstPlayerTurn = true;
+    private boolean firstPlayerTurn;
     private final boolean side;
     private Group tileGroup = new Group();
     private Group pieceGroup = new Group();
@@ -65,6 +65,7 @@ public class Board extends Application {
             }
         }
         initLock();
+        lock();
         return root;
     }
     
@@ -162,7 +163,7 @@ public class Board extends Application {
                     board[newX][newY].setPiece(piece);
                     checkKing(newX, newY, piece);
                     firstPlayerTurn = !firstPlayerTurn;
-                    //lock(firstPlayerTurn);
+                    lock();
                     try {
                     	server.getDos().writeInt(oldX);
                     	server.getDos().writeInt(oldY);
@@ -246,12 +247,27 @@ public class Board extends Application {
     }
     
     public void unlock() {
-    	for (int y = 0; y < HEIGHT; y++) {
-            for (int x = 0; x < WIDTH; x++) {
-            	if(board[x][y].hasPiece()) {
-            		board[x][y].getPiece().setMouseTransparent(false);
-            	}
-            }
+    	if(side) {
+			for (int y = 0; y < HEIGHT; y++) {
+                for (int x = 0; x < WIDTH; x++) {
+                	if(board[x][y].hasPiece()) {
+						if(board[x][y].getPiece().getType() == PieceType.RED || board[x][y].getPiece().getType() == PieceType.REDKING) {
+			    			board[x][y].getPiece().setMouseTransparent(false);
+			    		}
+                	}
+                }
+			}
+		}
+		else {
+			for (int y = 0; y < HEIGHT; y++) {
+                for (int x = 0; x < WIDTH; x++) {
+                	if(board[x][y].hasPiece()) {
+						if(board[x][y].getPiece().getType() == PieceType.WHITE || board[x][y].getPiece().getType() == PieceType.WHITEKING) {
+			    			board[x][y].getPiece().setMouseTransparent(false);
+			    		}
+                	}
+                }
+			}
 		}
     }
     
@@ -281,29 +297,14 @@ public class Board extends Application {
 	}
     
     public void lock() {
-    	unlock();
-    	if(firstPlayerTurn == side) {
-    		for (int y = 0; y < HEIGHT; y++) {
+    	if(!firstPlayerTurn) {
+			for (int y = 0; y < HEIGHT; y++) {
                 for (int x = 0; x < WIDTH; x++) {
                 	if(board[x][y].hasPiece()) {
-                		if((board[x][y].getPiece().getType() == PieceType.RED || board[x][y].getPiece().getType() == PieceType.REDKING) && !firstPlayerTurn) {
-                			board[x][y].getPiece().setMouseTransparent(true);
-                		}
-                		else if((board[x][y].getPiece().getType() == PieceType.WHITE || board[x][y].getPiece().getType() == PieceType.WHITEKING) && firstPlayerTurn) {
-                			board[x][y].getPiece().setMouseTransparent(true);
-                		}
+		    			board[x][y].getPiece().setMouseTransparent(true);
                 	}
                 }
-    		}
-    	}
-    	else {
-    		for (int y = 0; y < HEIGHT; y++) {
-                for (int x = 0; x < WIDTH; x++) {
-                	if(board[x][y].hasPiece()) {
-                		board[x][y].getPiece().setMouseTransparent(true);
-                	}
-                }
-    		}
+			}
     	}
     }
     
@@ -353,6 +354,7 @@ public class Board extends Application {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.server = server;
         this.side = side;
+        firstPlayerTurn = side;
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -373,6 +375,7 @@ public class Board extends Application {
     				KillY = null;
     			}
     			firstPlayerTurn = turn;
+    			unlock();
     			receiveMove(oldX, oldY, newX, newY, KillX, KillY);
     			System.out.println("Data successfully received");
     		} catch (IOException e) {
