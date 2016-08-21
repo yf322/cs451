@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Random;
 
 /**
   * A fairly generic server class that listens on port 9879; waits for clients to connect, then
@@ -12,6 +13,8 @@ import java.net.Socket;
   */
 public class Server {
 	private int port = 22222;
+	private final int portMin = 1024;
+	private final int portMax = 65535;
 	private String ip = "localhost";
 	private ServerSocket serverSocket; 
 	private Socket socket;
@@ -22,6 +25,10 @@ public class Server {
 	
 	public int getPort(){
 		return this.port;
+	}
+	
+	public void setPort(int port){
+		this.port = port;
 	}
 	
 	public String getIp(){
@@ -43,7 +50,6 @@ public class Server {
 	public void setDis(DataInputStream dis){
 		this.dis = dis;
 	}
-	
 	
 	public ServerSocket getServerSocket(){
 		return this.serverSocket;
@@ -67,6 +73,7 @@ public class Server {
 	
 	public Boolean createServerSocket(){
 		try {
+			createRandomPort();
 			this.serverSocket = new ServerSocket(port, 8, InetAddress.getByName(ip));
 			connection = true;
 			yourTurn = true;
@@ -86,7 +93,7 @@ public class Server {
 			dis = new DataInputStream(socket.getInputStream());
 			connection = true;
 		} catch (IOException e) {
-			System.out.println("No existing game. Please host a game first");
+			System.out.println("Please check your ID or host the game.");
 			return false;
 		}
 		System.out.println("Successfully connected to the server.");
@@ -106,5 +113,10 @@ public class Server {
 			System.out.println("error occured");
 			return false;
 		}
+	}
+	
+	public void createRandomPort(){
+		Random randomNumber = new Random();
+		this.port = randomNumber.nextInt(this.portMax - this.portMin + 1) + this.portMin;
 	}
 }
