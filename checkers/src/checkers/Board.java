@@ -221,7 +221,7 @@ public class Board extends Application {
     	}
     }
     
-    public void receiveMove(int oldX, int oldY, int newX, int newY, Integer killX, Integer killY, boolean turn) {
+    public void receiveMove(int oldX, int oldY, int newX, int newY, Integer killX, Integer killY) {
     	Piece piece = board[oldX][oldY].getPiece();
     	piece.move(newX, newY);
         board[oldX][oldY].setPiece(null);
@@ -230,7 +230,6 @@ public class Board extends Application {
         
         try {
         	Piece otherPiece = board[killX][killY].getPiece();
-        	System.out.println(otherPiece.getOldX() + " " + otherPiece.getOldY());
             board[killX][killY].setPiece(null);
             Platform.runLater(new Runnable(){
 				@Override
@@ -241,8 +240,7 @@ public class Board extends Application {
             
             checkKing(newX, newY, piece);
         } catch(Exception e) {
-        	e.printStackTrace();
-        	System.out.println(killX + " " +killY);
+        	
         }
     }
     
@@ -272,15 +270,15 @@ public class Board extends Application {
                 }
     		}
     	}
-//    	else {
-//    		for (int y = 0; y < HEIGHT; y++) {
-//                for (int x = 0; x < WIDTH; x++) {
-//                	if(board[x][y].hasPiece()) {
-//                		board[x][y].getPiece().setMouseTransparent(true);
-//                	}
-//                }
-//    		}
-//    	}
+    	else {
+    		for (int y = 0; y < HEIGHT; y++) {
+                for (int x = 0; x < WIDTH; x++) {
+                	if(board[x][y].hasPiece()) {
+                		board[x][y].getPiece().setMouseTransparent(true);
+                	}
+                }
+    		}
+    	}
     }
     
     public void topBar() {
@@ -347,7 +345,9 @@ public class Board extends Application {
     				KillX = null;
     				KillY = null;
     			}
-    			receiveMove(oldX, oldY, newX, newY, KillX, KillY, turn);
+    			firstPlayerTurn = turn;
+    			lock(firstPlayerTurn);
+    			receiveMove(oldX, oldY, newX, newY, KillX, KillY);
     			System.out.println("Data successfully received");
     		} catch (IOException e) {
     			// TODO Auto-generated catch block
