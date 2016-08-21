@@ -322,11 +322,8 @@ public class Board extends Application {
 		}
     }
     
-<<<<<<< HEAD
-    private void topBar() {
-=======
+
     public void topBar(Integer uniqueIdDis) {
->>>>>>> origin/master
 		JPanel topBar = new JPanel();
 		JButton quit = new JButton("QUIT");
 		JLabel uniqueId = new JLabel("Unique ID : " + uniqueIdDis);
@@ -357,13 +354,9 @@ public class Board extends Application {
 //		});
 //    }
     
-<<<<<<< HEAD
-    public Board(Server server, boolean side) {
-    	frame = new JFrame("Checkers");
-=======
+
     public Board(Server server, boolean side, Integer uniqueId) {
     	JFrame frame = new JFrame("Checkers");
->>>>>>> origin/master
         contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
