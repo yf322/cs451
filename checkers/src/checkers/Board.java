@@ -33,8 +33,6 @@ public class Board extends Application {
     private final boolean side;
     private Group tileGroup = new Group();
     private Group pieceGroup = new Group();
-    private int oppoPiece = 12;
-    private int urPiece = 12;
     JFrame frame;
     private JPanel contentPane;
     private Server server;
@@ -113,7 +111,7 @@ public class Board extends Application {
 	            int x1 = x0 + (newX - x0) / 2;
 	            int y1 = y0 + (newY - y0) / 2;
 	
-	            if (board[x1][y1].hasPiece() && board[x1][y1].getPiece().getType() != piece.getType()) {
+	            if (board[x1][y1].hasPiece() && board[x1][y1].getPiece().getType().oppoLine != piece.getType().oppoLine) {
 	                return new MoveResult(MoveType.KILL, board[x1][y1].getPiece());
 	            }
 	        }
@@ -126,7 +124,7 @@ public class Board extends Application {
 	            int x1 = x0 + (newX - x0) / 2;
 	            int y1 = y0 + (newY - y0) / 2;
 	
-	            if (board[x1][y1].hasPiece() && board[x1][y1].getPiece().getType() != piece.getType()) {
+	            if (board[x1][y1].hasPiece() && board[x1][y1].getPiece().getType().oppoLine != piece.getType().oppoLine) {
 	                return new MoveResult(MoveType.KILL, board[x1][y1].getPiece());
 	            }
 	        }
@@ -189,7 +187,6 @@ public class Board extends Application {
                     board[toBoard(otherPiece.getOldX())][toBoard(otherPiece.getOldY())].setPiece(null);
                     pieceGroup.getChildren().remove(otherPiece);
                     checkKing(newX, newY, piece);
-                    checkWin();
                     if(!dectectJumpable(piece, newX, newY)) {
                     	lock();
                     	firstPlayerTurn = !firstPlayerTurn;
@@ -207,6 +204,7 @@ public class Board extends Application {
                     } catch (Exception e1) {
                     	System.out.println("Error occured while sending some data");
                     }
+                    checkWin();
                     break;
             }
         });
@@ -238,29 +236,79 @@ public class Board extends Application {
     }
     
     private void checkWin() {
-    	oppoPiece--;
-    	System.out.println("Opponent's pieces: " + oppoPiece);
-    	Object[] array = {"You won!"};
-        Object[] options = {"Quit"};
-    	if(oppoPiece == 0) {
-    		int result = JOptionPane.showOptionDialog(null, array, "", JOptionPane.CLOSED_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-    		if(result == 0) {
-    			System.exit(0);
-    		}
+    	int i = 0;
+    	int j = 0;
+    	for (int y = 0; y < HEIGHT; y++) {
+            for (int x = 0; x < WIDTH; x++) {
+            	if(board[x][y].hasPiece()) {
+            		if(board[x][y].getPiece().getType() == PieceType.RED || board[x][y].getPiece().getType() == PieceType.REDKING) {
+            			i++;
+            		}
+            		else if(board[x][y].getPiece().getType() == PieceType.WHITE || board[x][y].getPiece().getType() == PieceType.WHITEKING){
+            			j++;
+            		}
+            	}
+            }
     	}
+    	if(side && j == 0) {
+    		Object[] array = {"You won!"};
+            Object[] options = {"Quit"};
+        	if(true) {
+        		int result = JOptionPane.showOptionDialog(null, array, "", JOptionPane.CLOSED_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+        		if(result == 0) {
+        			System.exit(0);
+        		}
+        	}
+    	}
+    	else if(!side && i == 0) {
+    		Object[] array = {"You won!"};
+            Object[] options = {"Quit"};
+        	if(true) {
+        		int result = JOptionPane.showOptionDialog(null, array, "", JOptionPane.CLOSED_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+        		if(result == 0) {
+        			System.exit(0);
+        		}
+        	}
+    	}
+    	
     }
     
     private void checkLose() {
-    	urPiece--;
-    	System.out.println("Your pieces:" + urPiece);
-    	Object[] array = {"You Lost!"};
-        Object[] options = {"Quit"};
-    	if(oppoPiece == 0) {
-    		int result = JOptionPane.showOptionDialog(null, array, "", JOptionPane.CLOSED_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-    		if(result == 0) {
-    			System.exit(0);
-    		}
+    	int i = 0;
+    	int j = 0;
+    	for (int y = 0; y < HEIGHT; y++) {
+            for (int x = 0; x < WIDTH; x++) {
+            	if(board[x][y].hasPiece()) {
+            		if(board[x][y].getPiece().getType() == PieceType.RED || board[x][y].getPiece().getType() == PieceType.REDKING) {
+            			i++;
+            		}
+            		else if(board[x][y].getPiece().getType() == PieceType.WHITE || board[x][y].getPiece().getType() == PieceType.WHITEKING){
+            			j++;
+            		}
+            	}
+            }
     	}
+    	if(!side && j == 0) {
+    		Object[] array = {"You Lost!"};
+            Object[] options = {"Quit"};
+        	if(true) {
+        		int result = JOptionPane.showOptionDialog(null, array, "", JOptionPane.CLOSED_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+        		if(result == 0) {
+        			System.exit(0);
+        		}
+        	}
+    	}
+    	else if(side && i == 0) {
+    		Object[] array = {"You Lost!"};
+            Object[] options = {"Quit"};
+        	if(true) {
+        		int result = JOptionPane.showOptionDialog(null, array, "", JOptionPane.CLOSED_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+        		if(result == 0) {
+        			System.exit(0);
+        		}
+        	}
+    	}
+    	
     }
     
     private void receiveMove(int oldX, int oldY, int newX, int newY, Integer killX, Integer killY) {
@@ -389,10 +437,10 @@ public class Board extends Application {
     				KillX = null;
     				KillY = null;
     			}
-    			else checkLose();;
     			firstPlayerTurn = turn;
     			unlock();
     			receiveMove(oldX, oldY, newX, newY, KillX, KillY);
+    			checkLose();
     			System.out.println("Data successfully received");
     		} catch (IOException e) {
     			// TODO Auto-generated catch block
