@@ -1,3 +1,21 @@
+commit a36ba8ba091a636b0470bcb0a5e616349f9f02c8
+Author: Harshil Patel <patelhr23@gmail.com>
+Date:   Sun Aug 21 21:29:29 2016 -0400
+
+    Updated comments in main.java & Ran CheckStyles tool. No errors besides few minor warnings.
+
+commit 05e4d8c3bda7f3242ff6f5ede551d95bd50ccdcd
+Author: Yongqiang Fan <yf322@drexel.edu>
+Date:   Sun Aug 21 21:34:27 2016 -0400
+
+    gitlog
+
+commit 3040d21b97f0730581f5cbbe5817d7166b286424
+Author: JunhoAn0702 <JunhoAn0702@gmail.com>
+Date:   Sun Aug 21 21:20:59 2016 -0400
+
+    Updating jar
+
 commit 1d5cbdb7132d8928438ed757bad67bcaa96b01ae
 Author: Yongqiang Fan <yf322@drexel.edu>
 Date:   Sun Aug 21 21:12:13 2016 -0400
