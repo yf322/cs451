@@ -7,6 +7,10 @@ import javax.swing.JOptionPane;
 
 /**
  * This is a main class for the main  
+ * Ran CheckStyles
+ * Ran FindBugs
+ * Used Github 
+ * Created JUnit test
  */
 
 public class Main {
