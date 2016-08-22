@@ -9,6 +9,7 @@ Checkers is a multiplayer game which provides an environment for two distant pla
 4. Viola!
 
 ## Testing the game on same machine
+
 1. Download all the files or the directory.
 2. Open file explorer or finder and locate the directory and navigate to find 'checkers.jar'. Then double click it and it will open the program.
 3. Click on 'Host' and it will prompt you to note unique ID for player two.
