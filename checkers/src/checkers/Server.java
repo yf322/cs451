@@ -109,8 +109,9 @@ public class Server {
 	}
 	
 	// Method to connect to the server using the port variable.
-	// If it is successfully connected to the server, it returns true, otherwise false.
-	public Boolean connectToServer(){
+	// If it is successfully connected to the server, it returns true, otherwise
+	// false.
+	public Boolean connectToServer() {
 		try {
 			socket = new Socket(this.ip, this.port);
 			dos = new DataOutputStream(socket.getOutputStream());

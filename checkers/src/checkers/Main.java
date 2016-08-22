@@ -31,10 +31,15 @@ public class Main {
 					JOptionPane.showMessageDialog(frame, "Your unique ID is "
 							+ server.getPort());
 				} else if (frame.getGameType().equals("Join")) {
-					server.setPort(Integer.valueOf(frame.getGameID()));
-					if (server.connectToServer()) {
-						frame.getStartButton().setEnabled(false);
-						startThread();
+					if (frame.getGameIDInt() == null) {
+						JOptionPane.showMessageDialog(frame,
+								"Please check the unique ID");
+					} else {
+						server.setPort(frame.getGameIDInt());
+						if (server.connectToServer()) {
+							frame.getStartButton().setEnabled(false);
+							startThread();
+						}
 					}
 				}
 			}
