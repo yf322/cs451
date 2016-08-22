@@ -1,0 +1,325 @@
+commit 1d5cbdb7132d8928438ed757bad67bcaa96b01ae
+Author: Yongqiang Fan <yf322@drexel.edu>
+Date:   Sun Aug 21 21:12:13 2016 -0400
+
+    small change
+
+commit 7c253c9b72a9bb5cb4620912abd58d148a93e847
+Author: Harshil Patel <patelhr23@gmail.com>
+Date:   Sun Aug 21 21:11:03 2016 -0400
+
+    Readme & ran FindBugs tool
+
+commit 358b037b3d3e101896be8fcdb71afad95ec90b17
+Author: Harshil Patel <patelhr23@gmail.com>
+Date:   Sun Aug 21 20:50:25 2016 -0400
+
+    readme update
+
+commit 6abded7b09b9e1929063620b06d42b0a00956593
+Author: Yongqiang Fan <yf322@drexel.edu>
+Date:   Sun Aug 21 21:09:32 2016 -0400
+
+    resize the menu
+
+commit f3973a19b26ba48f1f9577eeb5859f8dd46c8cc1
+Author: JunhoAn0702 <JunhoAn0702@gmail.com>
+Date:   Sun Aug 21 21:04:42 2016 -0400
+
+    Adding comments
+
+commit 9f73ebab440d70a89f2d6b8c307b9c9d13aec6da
+Author: JunhoAn0702 <JunhoAn0702@gmail.com>
+Date:   Sun Aug 21 20:53:44 2016 -0400
+
+    update Main
+
+commit 1be465750121c47ecac346eb30fafa92160e2bce
+Author: JunhoAn0702 <JunhoAn0702@gmail.com>
+Date:   Sun Aug 21 20:49:15 2016 -0400
+
+    test class
+
+commit 39c778f277b21aa0bcc29e9d5177e6f2f6b20181
+Merge: e061c0e 9657970
+Author: Harshil Patel <patelhr23@gmail.com>
+Date:   Sun Aug 21 20:47:47 2016 -0400
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 9657970047a8e6afc5e7186f69d1865789f17b25
+Author: JunhoAn0702 <JunhoAn0702@gmail.com>
+Date:   Sun Aug 21 20:44:41 2016 -0400
+
+    Formatting class
+
+commit e061c0e95779c7e1e5f8f1a4d192319cdd2a74bb
+Merge: 04f93fc 5ae6b66
+Author: Harshil Patel <patelhr23@gmail.com>
+Date:   Sun Aug 21 20:42:38 2016 -0400
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 5ae6b66a792c645fbf87997ddac224e69fc325b4
+Author: Yongqiang Fan <yf322@drexel.edu>
+Date:   Sun Aug 21 20:39:39 2016 -0400
+
+    delete this weird thing
+
+commit 04f93fcf67a992a1dcbcdd97b115ef00866b61ce
+Author: Harshil Patel <patelhr23@gmail.com>
+Date:   Sun Aug 21 20:39:31 2016 -0400
+
+    readme updated
+
+commit 60fc81c26da37d435fcbec1828c37e2cb15698c0
+Merge: 453ec62 ab559ab
+Author: Harshil Patel <patelhr23@gmail.com>
+Date:   Sun Aug 21 20:38:18 2016 -0400
+
+    Merge branch 'master' of https://github.com/yf322/cs451
+
+commit ab559ab0138060002c4e36888058d4a6046b4c1f
+Author: JunhoAn0702 <JunhoAn0702@gmail.com>
+Date:   Sun Aug 21 20:35:53 2016 -0400
+
+    Bug Fix
+
+commit 453ec62a7bee8aaf9df7299c00f1c5910ec7244e
+Author: Harshil Patel <patelhr23@gmail.com>
+Date:   Sun Aug 21 20:35:50 2016 -0400
+
+    readme update
+
+commit d43a83da16727a0da0f72699835a4bb4b8b01d3b
+Merge: f516ebb 86df04f
+Author: Harshil Patel <patelhr23@gmail.com>
+Date:   Sun Aug 21 20:33:53 2016 -0400
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 86df04fdc01fad2cffcc888cb3978e9835dde27c
+Author: Yongqiang Fan <yf322@drexel.edu>
+Date:   Sun Aug 21 20:30:00 2016 -0400
+
+    testcase
+
+commit f516ebb3b16c772d4943fcf2d8d984c8f58aa5c7
+Author: Harshil Patel <patelhr23@gmail.com>
+Date:   Sun Aug 21 20:30:00 2016 -0400
+
+    read me updated
+
+commit aa441cdfdd0f16c30b4e4222e1c83041716f05b6
+Author: JunhoAn0702 <JunhoAn0702@gmail.com>
+Date:   Sun Aug 21 20:26:13 2016 -0400
+
+    Bug Fix
+
+commit 1511995832873261c10373f8c9db98c1c1eaa49c
+Author: Harsh Bhargava <hb399@drexel.edu>
+Date:   Sun Aug 21 20:10:02 2016 -0400
+
+    Update README.md
+
+commit e88a44618ae1d6096a2f52df7782854bbc85e8d7
+Author: Harsh Bhargava <hb399@drexel.edu>
+Date:   Sun Aug 21 20:08:00 2016 -0400
+
+    Create README.md
+
+commit 2f45b728aea86073367178c1745b9b18a4790743
+Author: Yongqiang Fan <yf322@drexel.edu>
+Date:   Sun Aug 21 20:05:31 2016 -0400
+
+    comments on board
+
+commit bb57b343cce7216e35157c1db6f85e481f6322d0
+Author: JunhoAn0702 <JunhoAn0702@gmail.com>
+Date:   Sun Aug 21 19:56:42 2016 -0400
+
+    Comments for Menu class
+
+commit 8355c3bdb88bea109d9927c405032d7294d38e5a
+Author: JunhoAn0702 <JunhoAn0702@gmail.com>
+Date:   Sun Aug 21 19:51:30 2016 -0400
+
+    Bug Fix
+
+commit 856fe98470a19768fa01d33c7c7914889c1aa00e
+Author: Yongqiang Fan <yf322@drexel.edu>
+Date:   Sun Aug 21 19:45:21 2016 -0400
+
+    add the release note
+
+commit 02d5ffbfcfce4bd9f075b80c6f27425847e970e9
+Author: JunhoAn0702 <JunhoAn0702@gmail.com>
+Date:   Sun Aug 21 19:38:25 2016 -0400
+
+    Adding a jar
+
+commit ee88fb1c34f9f9fb1adba08a7e38328c26369fc2
+Author: JunhoAn0702 <JunhoAn0702@gmail.com>
+Date:   Sun Aug 21 19:20:42 2016 -0400
+
+    Adding comments
+
+commit c042df8c894a687ac73323b192e4513d7bee5253
+Author: JunhoAn0702 <JunhoAn0702@gmail.com>
+Date:   Sun Aug 21 18:29:36 2016 -0400
+
+    Bug fix
+
+commit f77e2beff13ce09979c80157fe2e6ddfeef11a18
+Author: JunhoAn0702 <JunhoAn0702@gmail.com>
+Date:   Sun Aug 21 18:25:30 2016 -0400
+
+    Bug fix
+
+commit 91d08ce736715780fc27e828733ceca3cd140b32
+Author: Yongqiang Fan <yf322@drexel.edu>
+Date:   Sun Aug 21 18:19:23 2016 -0400
+
+    debug
+
+commit 1ef508d9e3f783c7e0c54cb0e427e3ea50407efd
+Author: Yongqiang Fan <yf322@drexel.edu>
+Date:   Sun Aug 21 16:55:25 2016 -0400
+
+    after merge
+
+commit 68dd15f8e4330144e3da5a44d8837f9d1b787a68
+Merge: 30d855d ee1e778
+Author: Yongqiang Fan <yf322@drexel.edu>
+Date:   Sun Aug 21 16:50:12 2016 -0400
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #	checkers/src/checkers/Board.java
+
+commit 30d855d19451aa544ab4758d158b761e1e14dbf1
+Author: Yongqiang Fan <yf322@drexel.edu>
+Date:   Sun Aug 21 16:49:13 2016 -0400
+
+    determine winning
+
+commit ee1e778c398b16f22628a137673d93b646dece42
+Author: JunhoAn0702 <JunhoAn0702@gmail.com>
+Date:   Sun Aug 21 01:41:21 2016 -0400
+
+    Update uniqueId
+
+commit 4fc282335821b2685578e7d5633c3c9b4691ba82
+Author: Yongqiang Fan <yf322@drexel.edu>
+Date:   Sat Aug 20 23:27:54 2016 -0400
+
+    all kinds of locking and multijumping
+
+commit 13f9df15286cda64f44f96645cc6f3ad281c2c75
+Author: Yongqiang Fan <yf322@drexel.edu>
+Date:   Sat Aug 20 21:46:14 2016 -0400
+
+    lock
+
+commit ecc14f89d7610bf0a5368b92e4b6d06550017d38
+Author: Yongqiang Fan <yf322@drexel.edu>
+Date:   Sat Aug 20 21:19:11 2016 -0400
+
+    initLock
+
+commit 4ad435e8f14ed30ad762816d0d4a71d0efb653ea
+Author: Yongqiang Fan <yf322@drexel.edu>
+Date:   Sat Aug 20 21:01:05 2016 -0400
+
+    f
+
+commit 0f3f0a6f2d53b6a7cb3d91016492b9dee95194f3
+Author: Yongqiang Fan <yf322@drexel.edu>
+Date:   Sat Aug 20 20:57:46 2016 -0400
+
+    f
+
+commit 6833cf52bb343a397a9db3b4eaa9ffa0a23d8827
+Author: JunhoAn0702 <JunhoAn0702@gmail.com>
+Date:   Sat Aug 20 20:33:36 2016 -0400
+
+    fix the bug
+
+commit d662083bb14ca1c0496e34a76b176c02caefdb50
+Author: JunhoAn0702 <JunhoAn0702@gmail.com>
+Date:   Sat Aug 20 20:24:59 2016 -0400
+
+    test
+
+commit c0caaac6c738183dc44551a2e2983017d1ec232e
+Author: Yongqiang Fan <yf322@drexel.edu>
+Date:   Sat Aug 20 20:05:36 2016 -0400
+
+    f
+
+commit 781262c4a574441151537791cf5f894294e883be
+Author: Yongqiang Fan <yf322@drexel.edu>
+Date:   Sat Aug 20 19:40:39 2016 -0400
+
+    f
+
+commit 508a8ddde03da6caa264144470d2c2800d5488a3
+Author: JunhoAn0702 <JunhoAn0702@gmail.com>
+Date:   Sat Aug 20 19:34:48 2016 -0400
+
+    Establish connection
+
+commit a5dace0678b7ac5864d9cef676a38abf4a78c5cb
+Author: JunhoAn0702 <JunhoAn0702@gmail.com>
+Date:   Sat Aug 20 18:41:58 2016 -0400
+
+    update socket
+
+commit 17c0cdf78edc13ad80b786a069a0c0b5b0108b86
+Author: JunhoAn0702 <JunhoAn0702@gmail.com>
+Date:   Sat Aug 20 17:28:44 2016 -0400
+
+    Apply server
+
+commit 5759239e3c5b876e79bc9960c17b7a3f1c5131b9
+Author: Yongqiang Fan <yf322@drexel.edu>
+Date:   Fri Aug 19 20:36:33 2016 -0400
+
+    server part with connection
+
+commit e948521390484e5dfff1207cd4011525e481d60f
+Author: Yongqiang Fan <yf322@drexel.edu>
+Date:   Thu Aug 18 21:44:13 2016 -0400
+
+    decorated king piece
+
+commit 107dafd867516cf9e7dd791e8d766ffda4526f15
+Author: Yongqiang Fan <yf322@drexel.edu>
+Date:   Tue Aug 16 21:43:58 2016 -0400
+
+    nothing here
+
+commit 9acb8e2607547d338dbd8543ff9cd945425bf84f
+Author: Yongqiang Fan <yf322@drexel.edu>
+Date:   Tue Aug 16 21:36:51 2016 -0400
+
+    little change
+
+commit b083a9c8dbdf49f3233877bcebdb27c8f0a20b6a
+Author: Yongqiang Fan <yf322@drexel.edu>
+Date:   Fri Aug 12 19:25:01 2016 -0400
+
+    add switch sides and menu and staff
+
+commit f2dd4aaa2f0a7fdeac83ac76c4ccfccc2400b1ed
+Author: Yongqiang Fan <yf322@drexel.edu>
+Date:   Sat Aug 6 22:01:21 2016 -0400
+
+    add King piece && add perimeter check
+
+commit 970f5ed15bd773f7cd15c6610c16215e9377999b
+Author: Yongqiang Fan <yf322@drexel.edu>
+Date:   Sat Aug 6 16:04:14 2016 -0400
+
+    cs451
