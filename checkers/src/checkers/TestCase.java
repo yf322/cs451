@@ -12,6 +12,8 @@ public class TestCase {
 		/*
 		 * testing some methods inside Board class
 		 */
+		server.createServerSocket();
+		server.connectToServer();
 		Board board = new Board(server, true, 12345);
 		assertTrue(!board.perimeterCheck(8, 3));
 		assertTrue(board.perimeterCheck(3, 4));
