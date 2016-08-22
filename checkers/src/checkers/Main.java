@@ -11,12 +11,18 @@ import javax.swing.JOptionPane;
 
 public class Main {
 
+	// Attribute for Server class server
 	private Server server = new Server();
+	
+	// Attribute for Jframe Menu
 	private Menu frame = new Menu();
+	
+	// Main Method
 	public static void main(String[] args) {
 		Main main = new Main();
 	}
 
+	// Main constructor
 	public Main() {
 		frame.setVisible(true);
 		System.out.println(frame.getGameType());
