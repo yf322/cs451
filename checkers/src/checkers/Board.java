@@ -512,17 +512,6 @@ public class Board extends Application {
 		contentPane.add(topBar, BorderLayout.NORTH);
 	}
 
-	// public static void main(String[] args) {
-	// EventQueue.invokeLater(new Runnable() {
-	// public void run() {
-	// try {
-	// new Board();
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	// }
-	// });
-	// }
 
 	/**
 	 * constructor for this class
