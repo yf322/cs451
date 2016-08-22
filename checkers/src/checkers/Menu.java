@@ -127,7 +127,12 @@ public class Menu extends JFrame implements Serializable{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				if(start.isEnabled()){
+					System.exit(0);
+				}
+				else{
+					start.setEnabled(true);
+				}
 			}
 		});
 		buttonPanel.add(start);
@@ -150,12 +155,12 @@ public class Menu extends JFrame implements Serializable{
 	    
 	    contentPane.add(radioPanel, BorderLayout.NORTH);
 	    
+	    // ActionListener when host/join is clicked whether to display uniqueId text field.
 	    rdbtnHostButton.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent me){
 				textPanel.setVisible(false);
 			}
 		});
-		
 		rdbtnJoinButton.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent me){
 				textPanel.setVisible(true);
