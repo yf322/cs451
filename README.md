@@ -1,14 +1,14 @@
 # Checkers
 Checkers is a multiplayer game which provides an environment for two distant players to play against each other over the internet. This environment is user-friendly and realistic, just like two players playing on a physical board. The application is intended to run on personal computers in a local host environment.
 
-## Usage
+## User Usage
 
 1. Download all the files or the directory.
 2. Open terminal and type java -jar checkers.jar or click on the jar file from explorer or finder.
 3. Choose how to run the game, either host or join. Make sure you’re in the same network, i.e. local network.
 4. Viola!
 
-## Testing the game on same machine
+## Testing on the Same Machine
 
 1. Download all the files or the directory.
 2. Open file explorer or finder and locate the directory and navigate to find 'checkers.jar'. Then double click it and it will open the program.
