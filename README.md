@@ -14,7 +14,8 @@ Checkers is a multiplayer game which provides an environment for two distant pla
 3. Click on 'Host' and it will prompt you to note unique ID for player two.
 4. Open command line or terminal, locate the directory in which 'checkers.jar' is located. Then run 'java -jar checkers.jar' command to open up another window of the program.
 5. Click the 'Join' button and enter in the unique ID from step number 3 and hit join.
-6. Game will begin by a board showing up on both windows with RED starting first.
+6. Game will begin by boards showing up on both windows with RED starting first.
+
 
 
 ## History
