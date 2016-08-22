@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<BugCollection version="3.0.2-dev-20160306-90c514b" sequence="2" timestamp="1471830530364" analysisTimestamp="1471830528369" release="">
+  <Project projectName="checkers">
+    <Jar>/Users/Harshil/Documents/cs451/checkers/bin/checkers/Main$1.class</Jar>
+    <Jar>/Users/Harshil/Documents/cs451/checkers/bin/checkers/Main$2.class</Jar>
+    <Jar>/Users/Harshil/Documents/cs451/checkers/bin/checkers/Main.class</Jar>
+    <AuxClasspathEntry>/Users/Harshil/Documents/cs451/checkers/bin</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/Harshil/.p2/pool/plugins/org.junit_4.12.0.v201504281640/junit.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/Harshil/.p2/pool/plugins/org.hamcrest.core_1.3.0.v201303031735.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/jre/lib/rt.jar</AuxClasspathEntry>
+    <SrcDir>/Users/Harshil/Documents/cs451/checkers/src</SrcDir>
+    <Cloud id="edu.umd.cs.findbugs.cloud.doNothingCloud" online="false"></Cloud>
+  </Project>
+  <BugInstance type="DE_MIGHT_IGNORE" priority="2" rank="16" abbrev="DE" category="BAD_PRACTICE" first="1">
+    <Class classname="checkers.Board">
+      <SourceLine classname="checkers.Board" sourcefile="Board.java" sourcepath="checkers/Board.java"/>
+    </Class>
+    <Method classname="checkers.Board" name="receiveMove" signature="(IIIILjava/lang/Integer;Ljava/lang/Integer;)V" isStatic="false">
+      <SourceLine classname="checkers.Board" start="425" end="445" startBytecode="0" endBytecode="329" sourcefile="Board.java" sourcepath="checkers/Board.java"/>
+    </Method>
+    <Class classname="java.lang.Exception" role="CLASS_EXCEPTION">
+      <SourceLine classname="java.lang.Exception" sourcefile="Exception.java" sourcepath="java/lang/Exception.java"/>
+    </Class>
+    <SourceLine classname="checkers.Board" start="442" end="442" startBytecode="122" endBytecode="122" sourcefile="Board.java" sourcepath="checkers/Board.java"/>
+    <SourceLine classname="checkers.Board" start="442" end="442" startBytecode="122" endBytecode="122" sourcefile="Board.java" sourcepath="checkers/Board.java"/>
+    <SourceLine classname="checkers.Board" start="442" end="442" startBytecode="122" endBytecode="122" sourcefile="Board.java" sourcepath="checkers/Board.java"/>
+  </BugInstance>
+  <BugInstance type="DM_EXIT" priority="2" rank="16" abbrev="Dm" category="BAD_PRACTICE" first="1">
+    <Class classname="checkers.Board">
+      <SourceLine classname="checkers.Board" sourcefile="Board.java" sourcepath="checkers/Board.java"/>
+    </Class>
+    <Method classname="checkers.Board" name="&lt;init&gt;" signature="(Lcheckers/Server;ZLjava/lang/Integer;)V" isStatic="false">
+      <SourceLine classname="checkers.Board" start="526" end="547" startBytecode="0" endBytecode="799" sourcefile="Board.java" sourcepath="checkers/Board.java"/>
+    </Method>
+    <SourceLine classname="checkers.Board" start="569" end="569" startBytecode="359" endBytecode="359" sourcefile="Board.java" sourcepath="checkers/Board.java"/>
+    <SourceLine classname="checkers.Board" start="569" end="569" startBytecode="359" endBytecode="359" sourcefile="Board.java" sourcepath="checkers/Board.java"/>
+  </BugInstance>
+  <BugInstance type="DM_EXIT" priority="2" rank="16" abbrev="Dm" category="BAD_PRACTICE" first="1">
+    <Class classname="checkers.Board">
+      <SourceLine classname="checkers.Board" sourcefile="Board.java" sourcepath="checkers/Board.java"/>
+    </Class>
+    <Method classname="checkers.Board" name="checkLose" signature="()V" isStatic="false">
+      <SourceLine classname="checkers.Board" start="372" end="411" startBytecode="0" endBytecode="565" sourcefile="Board.java" sourcepath="checkers/Board.java"/>
+    </Method>
+    <SourceLine classname="checkers.Board" start="395" end="395" startBytecode="201" endBytecode="201" sourcefile="Board.java" sourcepath="checkers/Board.java"/>
+    <SourceLine classname="checkers.Board" start="395" end="395" startBytecode="201" endBytecode="201" sourcefile="Board.java" sourcepath="checkers/Board.java"/>
+  </BugInstance>
+  <BugInstance type="DM_EXIT" priority="2" rank="16" abbrev="Dm" category="BAD_PRACTICE" first="1">
+    <Class classname="checkers.Board">
+      <SourceLine classname="checkers.Board" sourcefile="Board.java" sourcepath="checkers/Board.java"/>
+    </Class>
+    <Method classname="checkers.Board" name="checkWin" signature="()V" isStatic="false">
+      <SourceLine classname="checkers.Board" start="327" end="366" startBytecode="0" endBytecode="565" sourcefile="Board.java" sourcepath="checkers/Board.java"/>
+    </Method>
+    <SourceLine classname="checkers.Board" start="350" end="350" startBytecode="201" endBytecode="201" sourcefile="Board.java" sourcepath="checkers/Board.java"/>
+    <SourceLine classname="checkers.Board" start="350" end="350" startBytecode="201" endBytecode="201" sourcefile="Board.java" sourcepath="checkers/Board.java"/>
+  </BugInstance>
+  <BugInstance type="UUF_UNUSED_FIELD" priority="2" rank="18" abbrev="UuF" category="PERFORMANCE" first="1">
+    <Class classname="checkers.Board">
+      <SourceLine classname="checkers.Board" sourcefile="Board.java" sourcepath="checkers/Board.java"/>
+    </Class>
+    <Field classname="checkers.Board" name="frame" signature="Ljavax/swing/JFrame;" isStatic="false">
+      <SourceLine classname="checkers.Board" start="42" end="42" startBytecode="0" endBytecode="0" sourcefile="Board.java" sourcepath="checkers/Board.java"/>
+    </Field>
+  </BugInstance>
+  <BugInstance type="DM_EXIT" priority="2" rank="16" abbrev="Dm" category="BAD_PRACTICE" first="1">
+    <Class classname="checkers.Board$4">
+      <SourceLine classname="checkers.Board$4" sourcefile="Board.java" sourcepath="checkers/Board.java"/>
+    </Class>
+    <Method classname="checkers.Board$4" name="actionPerformed" signature="(Ljava/awt/event/ActionEvent;)V" isStatic="false">
+      <SourceLine classname="checkers.Board$4" start="505" end="507" startBytecode="0" endBytecode="60" sourcefile="Board.java" sourcepath="checkers/Board.java"/>
+    </Method>
+    <SourceLine classname="checkers.Board$4" start="505" end="505" startBytecode="1" endBytecode="1" sourcefile="Board.java" sourcepath="checkers/Board.java"/>
+    <SourceLine classname="checkers.Board$4" start="505" end="505" startBytecode="1" endBytecode="1" sourcefile="Board.java" sourcepath="checkers/Board.java"/>
+  </BugInstance>
+  <BugInstance type="DLS_DEAD_LOCAL_STORE" priority="1" rank="15" abbrev="DLS" category="STYLE" first="1">
+    <Class classname="checkers.Main">
+      <SourceLine classname="checkers.Main" sourcefile="Main.java" sourcepath="checkers/Main.java"/>
+    </Class>
+    <Method classname="checkers.Main" name="initalSetup" signature="()V" isStatic="false">
+      <SourceLine classname="checkers.Main" start="85" end="101" startBytecode="0" endBytecode="44" sourcefile="Main.java" sourcepath="checkers/Main.java"/>
+    </Method>
+    <LocalVariable name="board" register="1" pc="88" role="LOCAL_VARIABLE_NAMED"/>
+    <SourceLine classname="checkers.Main" start="92" end="92" startBytecode="87" endBytecode="87" sourcefile="Main.java" sourcepath="checkers/Main.java"/>
+    <SourceLine classname="checkers.Main" start="92" end="92" startBytecode="87" endBytecode="87" sourcefile="Main.java" sourcepath="checkers/Main.java"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.DEAD_OBJECT_STORE" value="true"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.LOCAL_NAME" value="board"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.METHOD_RESULT" value="true"/>
+  </BugInstance>
+  <BugInstance type="DLS_DEAD_LOCAL_STORE" priority="1" rank="15" abbrev="DLS" category="STYLE" first="1">
+    <Class classname="checkers.Main">
+      <SourceLine classname="checkers.Main" sourcefile="Main.java" sourcepath="checkers/Main.java"/>
+    </Class>
+    <Method classname="checkers.Main" name="main" signature="([Ljava/lang/String;)V" isStatic="true">
+      <SourceLine classname="checkers.Main" start="26" end="27" startBytecode="0" endBytecode="4" sourcefile="Main.java" sourcepath="checkers/Main.java"/>
+    </Method>
+    <LocalVariable name="main" register="1" pc="8" role="LOCAL_VARIABLE_NAMED"/>
+    <SourceLine classname="checkers.Main" start="26" end="26" startBytecode="7" endBytecode="7" sourcefile="Main.java" sourcepath="checkers/Main.java"/>
+    <SourceLine classname="checkers.Main" start="26" end="26" startBytecode="7" endBytecode="7" sourcefile="Main.java" sourcepath="checkers/Main.java"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.DEAD_OBJECT_STORE" value="true"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.LOCAL_NAME" value="main"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.METHOD_RESULT" value="true"/>
+  </BugInstance>
+  <BugInstance type="DM_EXIT" priority="2" rank="16" abbrev="Dm" category="BAD_PRACTICE" first="1">
+    <Class classname="checkers.Menu$2">
+      <SourceLine classname="checkers.Menu$2" sourcefile="Menu.java" sourcepath="checkers/Menu.java"/>
+    </Class>
+    <Method classname="checkers.Menu$2" name="actionPerformed" signature="(Ljava/awt/event/ActionEvent;)V" isStatic="false">
+      <SourceLine classname="checkers.Menu$2" start="136" end="142" startBytecode="0" endBytecode="109" sourcefile="Menu.java" sourcepath="checkers/Menu.java"/>
+    </Method>
+    <SourceLine classname="checkers.Menu$2" start="137" end="137" startBytecode="14" endBytecode="14" sourcefile="Menu.java" sourcepath="checkers/Menu.java"/>
+    <SourceLine classname="checkers.Menu$2" start="137" end="137" startBytecode="14" endBytecode="14" sourcefile="Menu.java" sourcepath="checkers/Menu.java"/>
+  </BugInstance>
+  <BugInstance type="SS_SHOULD_BE_STATIC" priority="2" rank="18" abbrev="SS" category="PERFORMANCE" first="1">
+    <Class classname="checkers.Server">
+      <SourceLine classname="checkers.Server" sourcefile="Server.java" sourcepath="checkers/Server.java"/>
+    </Class>
+    <Field classname="checkers.Server" name="ip" signature="Ljava/lang/String;" isStatic="false">
+      <SourceLine classname="checkers.Server" sourcefile="Server.java" sourcepath="checkers/Server.java"/>
+    </Field>
+    <SourceLine classname="checkers.Server" start="22" end="22" startBytecode="27" endBytecode="27" sourcefile="Server.java" sourcepath="checkers/Server.java"/>
+  </BugInstance>
+  <BugInstance type="SS_SHOULD_BE_STATIC" priority="2" rank="18" abbrev="SS" category="PERFORMANCE" first="1">
+    <Class classname="checkers.Server">
+      <SourceLine classname="checkers.Server" sourcefile="Server.java" sourcepath="checkers/Server.java"/>
+    </Class>
+    <Field classname="checkers.Server" name="portMax" signature="I" isStatic="false">
+      <SourceLine classname="checkers.Server" sourcefile="Server.java" sourcepath="checkers/Server.java"/>
+    </Field>
+    <SourceLine classname="checkers.Server" start="19" end="19" startBytecode="21" endBytecode="21" sourcefile="Server.java" sourcepath="checkers/Server.java"/>
+  </BugInstance>
+  <BugInstance type="SS_SHOULD_BE_STATIC" priority="2" rank="18" abbrev="SS" category="PERFORMANCE" first="1">
+    <Class classname="checkers.Server">
+      <SourceLine classname="checkers.Server" sourcefile="Server.java" sourcepath="checkers/Server.java"/>
+    </Class>
+    <Field classname="checkers.Server" name="portMin" signature="I" isStatic="false">
+      <SourceLine classname="checkers.Server" sourcefile="Server.java" sourcepath="checkers/Server.java"/>
+    </Field>
+    <SourceLine classname="checkers.Server" start="18" end="18" startBytecode="15" endBytecode="15" sourcefile="Server.java" sourcepath="checkers/Server.java"/>
+  </BugInstance>
+  <Errors errors="0" missingClasses="0"></Errors>
+  <FindBugsSummary timestamp="Sun, 21 Aug 2016 21:48:48 -0400" total_classes="3" referenced_classes="58" total_bugs="12" total_size="67" num_packages="1" java_version="1.8.0_101" vm_version="25.101-b13" cpu_seconds="24.76" clock_seconds="88.86" peak_mbytes="445.56" alloc_mbytes="1024.00" gc_seconds="0.17" priority_2="10" priority_1="2">
+    <PackageStats package="checkers" total_bugs="12" total_types="7" total_size="67" priority_2="10" priority_1="2">
+      <ClassStats class="checkers.Main" sourceFile="Main.java" interface="false" size="32" bugs="2" priority_1="2"/>
+      <ClassStats class="checkers.Main$1" sourceFile="Main.java" interface="false" size="22" bugs="0"/>
+      <ClassStats class="checkers.Main$2" sourceFile="Main.java" interface="false" size="13" bugs="0"/>
+    </PackageStats>
+    <FindBugsProfile>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassInfoAnalysisEngine" totalMilliseconds="466" invocations="678" avgMicrosecondsPerInvocation="688" maxMicrosecondsPerInvocation="38770" standardDeviationMircosecondsPerInvocation="2215"/>
+      <ClassProfile name="de.tobject.findbugs.builder.FindBugs2Eclipse" totalMilliseconds="300" invocations="2" avgMicrosecondsPerInvocation="150165" maxMicrosecondsPerInvocation="233713" standardDeviationMircosecondsPerInvocation="83548"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FieldItemSummary" totalMilliseconds="148" invocations="58" avgMicrosecondsPerInvocation="2566" maxMicrosecondsPerInvocation="38274" standardDeviationMircosecondsPerInvocation="5391"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNoSideEffectMethods" totalMilliseconds="146" invocations="58" avgMicrosecondsPerInvocation="2525" maxMicrosecondsPerInvocation="50665" standardDeviationMircosecondsPerInvocation="6928"/>
+      <ClassProfile name="edu.umd.cs.findbugs.OpcodeStack$JumpInfoFactory" totalMilliseconds="107" invocations="187" avgMicrosecondsPerInvocation="572" maxMicrosecondsPerInvocation="5181" standardDeviationMircosecondsPerInvocation="693"/>
+      <ClassProfile name="edu.umd.cs.findbugs.util.TopologicalSort" totalMilliseconds="103" invocations="634" avgMicrosecondsPerInvocation="163" maxMicrosecondsPerInvocation="47299" standardDeviationMircosecondsPerInvocation="1913"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.ExplicitSerialization" totalMilliseconds="87" invocations="58" avgMicrosecondsPerInvocation="1503" maxMicrosecondsPerInvocation="74542" standardDeviationMircosecondsPerInvocation="9721"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassDataAnalysisEngine" totalMilliseconds="84" invocations="681" avgMicrosecondsPerInvocation="124" maxMicrosecondsPerInvocation="8483" standardDeviationMircosecondsPerInvocation="529"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.EqualsOperandShouldHaveClassCompatibleWithThis" totalMilliseconds="49" invocations="58" avgMicrosecondsPerInvocation="853" maxMicrosecondsPerInvocation="31794" standardDeviationMircosecondsPerInvocation="4196"/>
+    </FindBugsProfile>
+  </FindBugsSummary>
+  <ClassFeatures></ClassFeatures>
+  <History>
+    <AppVersion sequence="0" timestamp="1471830526704" release="" codeSize="0" numClasses="0"/>
+    <AppVersion sequence="1" timestamp="1471830526708" release="" codeSize="770" numClasses="21"/>
+  </History>
+</BugCollection>
