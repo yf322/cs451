@@ -115,6 +115,7 @@ public class Server {
 			socket = new Socket(this.ip, this.port);
 			dos = new DataOutputStream(socket.getOutputStream());
 			dis = new DataInputStream(socket.getInputStream());
+			yourTurn = false;
 			connection = true;
 		} catch (IOException e) {
 			System.out.println("Please check your ID or host the game.");
