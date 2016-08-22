@@ -85,7 +85,7 @@ public class Board extends Application {
      * @param y the y coordinate
      * @return
      */
-    private boolean perimeterCheck(int x, int y) {
+    public boolean perimeterCheck(int x, int y) {
     	if (x < 0 || x > 7 || y < 0 || y > 7) {
         	return false;
         }
@@ -99,7 +99,7 @@ public class Board extends Application {
      * @param newY the target y coordinate
      * @return if there is a jump
      */
-    private boolean dectectJumpable(Piece piece, int newX, int newY) {
+    public boolean dectectJumpable(Piece piece, int newX, int newY) {
     	int[][] dir = new int[][]{{2,2}, {-2,2}, {-2,-2}, {2,-2}};
     	for(int i = 0; i < dir.length; i++) {
     		int destX = newX + dir[i][0];
@@ -121,7 +121,7 @@ public class Board extends Application {
      * @param newY the target y coordinate
      * @return the move result
      */
-    private MoveResult tryMove(Piece piece, int newX, int newY) {
+    public MoveResult tryMove(Piece piece, int newX, int newY) {
     	if (!perimeterCheck(newX, newY)) {
     		return new MoveResult(MoveType.NONE);
     	}
@@ -167,7 +167,7 @@ public class Board extends Application {
      * @param pixel the pixel value
      * @return the coordinate 
      */
-    private int toBoard(double pixel) {
+    public int toBoard(double pixel) {
         return (int)(pixel + TILE_SIZE / 2) / TILE_SIZE;
     }
     
@@ -175,7 +175,7 @@ public class Board extends Application {
      * initiate the fxpanel
      * @param fxPanel
      */
-    private void initFX(JFXPanel fxPanel) {
+    public void initFX(JFXPanel fxPanel) {
         Scene scene = new Scene(createContent());
         fxPanel.setScene(scene);
     }
@@ -188,7 +188,7 @@ public class Board extends Application {
      * @param server the server to transmit the data
      * @return the piece it created
      */
-    private Piece makePiece(PieceType type, int x, int y, Server server) {
+    public Piece makePiece(PieceType type, int x, int y, Server server) {
         Piece piece = new Piece(type, x, y);
 
         piece.setOnMouseReleased(e -> {
@@ -264,7 +264,7 @@ public class Board extends Application {
      * @param newY new y coordinate
      * @param piece the piece is checking
      */
-    private void checkKing(int newX, int newY, Piece piece) {
+    public void checkKing(int newX, int newY, Piece piece) {
     	if(!piece.getType().isKing && (piece.getType().oppoLine == newY)) {
     		if(piece.getType() == PieceType.RED) {
     			piece.setType(PieceType.REDKING);
@@ -290,7 +290,7 @@ public class Board extends Application {
     /**
      * see if you will win after the move
      */
-    private void checkWin() {
+    public void checkWin() {
     	int i = 0;
     	int j = 0;
     	for (int y = 0; y < HEIGHT; y++) {
@@ -331,7 +331,7 @@ public class Board extends Application {
     /**
      * see if you will lose after a piece being taken out
      */
-    private void checkLose() {
+    public void checkLose() {
     	int i = 0;
     	int j = 0;
     	for (int y = 0; y < HEIGHT; y++) {
@@ -378,7 +378,7 @@ public class Board extends Application {
      * @param killX
      * @param killY
      */
-    private void receiveMove(int oldX, int oldY, int newX, int newY, Integer killX, Integer killY) {
+    public void receiveMove(int oldX, int oldY, int newX, int newY, Integer killX, Integer killY) {
     	Piece piece = board[oldX][oldY].getPiece();
     	piece.move(newX, newY);
         board[oldX][oldY].setPiece(null);
@@ -404,7 +404,7 @@ public class Board extends Application {
     /**
      * unlock the piece when is your turn
      */
-    private void unlock() {
+    public void unlock() {
     	if(side && firstPlayerTurn) {
 			for (int y = 0; y < HEIGHT; y++) {
                 for (int x = 0; x < WIDTH; x++) {
@@ -432,7 +432,7 @@ public class Board extends Application {
     /**
      * lock everything!!!
      */
-    private void lock() {
+    public void lock() {
     	System.out.println("Locked Current player.");
 		for (int y = 0; y < HEIGHT; y++) {
 		    for (int x = 0; x < WIDTH; x++) {
