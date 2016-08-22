@@ -45,6 +45,15 @@ public class Menu extends JFrame implements Serializable{
 		return this.id.getText();
 	}
 	
+	// Method to get the GameID from the textBox
+		public Integer getGameIDInt(){
+			Integer val = null;
+			try {
+			    val = Integer.parseInt(getGameID());
+			  } catch (NumberFormatException nfe) {}
+			  return val;
+		}
+	
 	// Method to get the game type from the radio button
 	public String getGameType(){
 		for (Enumeration<AbstractButton> buttons = hostJoinGroup.getElements(); buttons.hasMoreElements();) {
