@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.Serializable;
@@ -24,9 +23,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
-
-import com.sun.glass.ui.MenuBar;
-import com.sun.org.apache.xml.internal.resolver.helpers.PublicId;
 
 /**
  * This is a Menu class for JFrame Menu Screen
@@ -127,7 +123,12 @@ public class Menu extends JFrame implements Serializable{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				if(start.isEnabled()){
+					System.exit(0);
+				}
+				else{
+					start.setEnabled(true);
+				}
 			}
 		});
 		buttonPanel.add(start);
@@ -150,12 +151,12 @@ public class Menu extends JFrame implements Serializable{
 	    
 	    contentPane.add(radioPanel, BorderLayout.NORTH);
 	    
+	    // ActionListener when host/join is clicked whether to display uniqueId text field.
 	    rdbtnHostButton.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent me){
 				textPanel.setVisible(false);
 			}
 		});
-		
 		rdbtnJoinButton.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent me){
 				textPanel.setVisible(true);

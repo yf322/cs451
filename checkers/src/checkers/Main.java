@@ -13,7 +13,6 @@ public class Main {
 
 	private Server server = new Server();
 	private Menu frame = new Menu();
-
 	public static void main(String[] args) {
 		Main main = new Main();
 	}
@@ -27,6 +26,7 @@ public class Main {
 				if (frame.getGameType().equals("Host")) {
 					if (server.createServerSocket()) {
 						frame.getStartButton().setEnabled(false);
+						startThread();
 					}
 					JOptionPane.showMessageDialog(frame, "Your unique ID is "
 							+ server.getPort());
@@ -34,22 +34,30 @@ public class Main {
 					server.setPort(Integer.valueOf(frame.getGameID()));
 					if (server.connectToServer()) {
 						frame.getStartButton().setEnabled(false);
+						startThread();
 					}
 				}
 			}
 		});
-		while (true) {
-			try {
-				if (server.getConnection()) {
-					initalSetup();
-					break;
-				}
-				Thread.sleep(1000);
-			} catch (InterruptedException e1) {
-			}
-		}
 	}
 
+	public void startThread(){
+		new Thread() {  
+			public void run() {
+			while (true) {
+				try {
+					if (server.getConnection()) {
+						initalSetup();
+						break;
+					}
+					Thread.sleep(1000);
+				} catch (InterruptedException e1) {
+				}
+			}
+			}
+		}.start();
+	}
+	
 	public void initalSetup() {
 		Board board;
 		if (!server.getYourTurn()) {
