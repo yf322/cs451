@@ -21,7 +21,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
+/**
+ * 
+ * @author Yongqiang (fldclassicblue@gmail.com)
+ *
+ * The Board class is where the game is actually playing.
+ */
 public class Board extends Application {
 
     public static final int TILE_SIZE = 100;
@@ -37,6 +42,10 @@ public class Board extends Application {
     private JPanel contentPane;
     private Server server;
     
+    /**
+     * This method creates the content with the javafx and initiate the game.
+     * @return Parent of the content
+     */
     private Parent createContent() {
         Pane root = new Pane();
         root.setPrefSize(WIDTH * TILE_SIZE, HEIGHT * TILE_SIZE);
@@ -70,6 +79,12 @@ public class Board extends Application {
         return root;
     }
     
+    /**
+     * check if the players' move is out of boundary
+     * @param x the x coordinate
+     * @param y the y coordinate
+     * @return
+     */
     private boolean perimeterCheck(int x, int y) {
     	if (x < 0 || x > 7 || y < 0 || y > 7) {
         	return false;
@@ -77,6 +92,13 @@ public class Board extends Application {
     	return true;
     }
     
+    /**
+     * to see if there is a multiple jump available
+     * @param piece the piece made the previoud jump	
+     * @param newX the target x coordinate
+     * @param newY the target y coordinate
+     * @return if there is a jump
+     */
     private boolean dectectJumpable(Piece piece, int newX, int newY) {
     	int[][] dir = new int[][]{{2,2}, {-2,2}, {-2,-2}, {2,-2}};
     	for(int i = 0; i < dir.length; i++) {
@@ -92,6 +114,13 @@ public class Board extends Application {
     	return false;
     }
 
+    /**
+     * see if you can make a move
+     * @param piece the piece make the move
+     * @param newX the target x coordinate
+     * @param newY the target y coordinate
+     * @return the move result
+     */
     private MoveResult tryMove(Piece piece, int newX, int newY) {
     	if (!perimeterCheck(newX, newY)) {
     		return new MoveResult(MoveType.NONE);
@@ -133,15 +162,32 @@ public class Board extends Application {
         return new MoveResult(MoveType.NONE);
     }
 
+    /**
+     * transform pixel to coordinate
+     * @param pixel the pixel value
+     * @return the coordinate 
+     */
     private int toBoard(double pixel) {
         return (int)(pixel + TILE_SIZE / 2) / TILE_SIZE;
     }
     
+    /**
+     * initiate the fxpanel
+     * @param fxPanel
+     */
     private void initFX(JFXPanel fxPanel) {
         Scene scene = new Scene(createContent());
         fxPanel.setScene(scene);
     }
 
+    /**
+     * put a piece on the board with listener
+     * @param type the type of the piece
+     * @param x x coordinate 
+     * @param y y coordinate
+     * @param server the server to transmit the data
+     * @return the piece it created
+     */
     private Piece makePiece(PieceType type, int x, int y, Server server) {
         Piece piece = new Piece(type, x, y);
 
@@ -212,6 +258,12 @@ public class Board extends Application {
         return piece;
     }
     
+    /**
+     * check if there will be a new king
+     * @param newX new x coordinate
+     * @param newY new y coordinate
+     * @param piece the piece is checking
+     */
     private void checkKing(int newX, int newY, Piece piece) {
     	if(!piece.getType().isKing && (piece.getType().oppoLine == newY)) {
     		if(piece.getType() == PieceType.RED) {
@@ -235,6 +287,9 @@ public class Board extends Application {
     	}
     }
     
+    /**
+     * see if you will win after the move
+     */
     private void checkWin() {
     	int i = 0;
     	int j = 0;
@@ -273,6 +328,9 @@ public class Board extends Application {
     	
     }
     
+    /**
+     * see if you will lose after a piece being taken out
+     */
     private void checkLose() {
     	int i = 0;
     	int j = 0;
@@ -311,6 +369,15 @@ public class Board extends Application {
     	
     }
     
+    /**
+     * receive the data from the server, no need to introduce the parameters
+     * @param oldX 
+     * @param oldY
+     * @param newX
+     * @param newY
+     * @param killX
+     * @param killY
+     */
     private void receiveMove(int oldX, int oldY, int newX, int newY, Integer killX, Integer killY) {
     	Piece piece = board[oldX][oldY].getPiece();
     	piece.move(newX, newY);
@@ -334,6 +401,9 @@ public class Board extends Application {
         }
     }
     
+    /**
+     * unlock the piece when is your turn
+     */
     private void unlock() {
     	if(side && firstPlayerTurn) {
 			for (int y = 0; y < HEIGHT; y++) {
@@ -359,6 +429,9 @@ public class Board extends Application {
 		}
     }
     
+    /**
+     * lock everything!!!
+     */
     private void lock() {
     	System.out.println("Locked Current player.");
 		for (int y = 0; y < HEIGHT; y++) {
@@ -371,6 +444,10 @@ public class Board extends Application {
     }
     
 
+    /**
+     * top bar menu
+     * @param uniqueIdDis the unique Id of the game
+     */
     public void topBar(Integer uniqueIdDis) {
 		JPanel topBar = new JPanel();
 		JButton quit = new JButton("QUIT");
@@ -403,6 +480,12 @@ public class Board extends Application {
 //    }
     
 
+    /**
+     * constructor for this class
+     * @param server the server class to transmit the data
+     * @param side what is your side
+     * @param uniqueId the unique Id of the game
+     */
     public Board(Server server, boolean side, Integer uniqueId) {
     	JFrame frame = new JFrame("Checkers");
         contentPane = new JPanel();
